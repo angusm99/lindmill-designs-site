@@ -700,6 +700,51 @@
     }
     .modal-item-ph svg { opacity: 0.35; }
 
+    /* Modal loading + empty-state */
+    .modal-loading {
+      grid-column: 1 / -1;
+      text-align: center;
+      color: #999;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+    .modal-grid.single-hero { display: block; }
+    .modal-hero {
+      width: 100%;
+      max-height: 420px;
+      overflow: hidden;
+      border-radius: 8px;
+      background: #f0effa;
+      margin-bottom: 1.2rem;
+    }
+    .modal-hero img {
+      width: 100%;
+      height: 100%;
+      max-height: 420px;
+      object-fit: cover;
+      display: block;
+      cursor: zoom-in;
+    }
+    .modal-coming-soon {
+      text-align: center;
+      padding: 1.4rem 1rem;
+      border: 2px dashed rgba(255,61,150,0.4);
+      border-radius: 10px;
+      background: rgba(255,61,150,0.05);
+    }
+    .modal-coming-soon strong {
+      display: block;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.2rem;
+      color: var(--pink);
+      margin-bottom: 0.4rem;
+    }
+    .modal-coming-soon span {
+      font-size: 0.88rem;
+      color: #777;
+      line-height: 1.5;
+    }
+
     /* Lightbox (single image zoom) */
     .lightbox {
       position: fixed;
@@ -905,126 +950,96 @@
       <!-- Category filter pills -->
       <div class="filter-bar">
         <button class="filter-pill active" data-filter="all">All</button>
-        <button class="filter-pill" data-filter="motion">Motion</button>
-        <button class="filter-pill" data-filter="branding">Branding</button>
-        <button class="filter-pill" data-filter="product">Product</button>
+        <button class="filter-pill" data-filter="motion-illustration">Motion + Illustration</button>
         <button class="filter-pill" data-filter="digital">Digital</button>
-        <button class="filter-pill" data-filter="textile">Textile</button>
+        <button class="filter-pill" data-filter="branding">Branding</button>
       </div>
 
-      <!-- 4-column project grid -->
+      <!-- 4-column project grid - matches Linda's 12 ALL WORK thumbnails -->
       <div class="project-grid" id="projectGrid">
 
-        <!-- 1. Motion & Animation -->
-        <div class="project-tile" data-category="motion" onclick="openModal('animation')">
-          <div class="tile-icon">🎬</div>
-          <img class="tile-img" src="images/animation/01.jpg" alt=""
-               onerror="this.style.display='none'">
+        <!-- 1. ANIMATED -->
+        <div class="project-tile" data-category="motion-illustration" onclick="openModal('animated')">
+          <img class="tile-img" src="images/thumbnails/01.gif" alt="Animated">
           <div class="tile-pink-overlay"></div>
-          <div class="tile-label">Motion &amp; Animation</div>
+          <div class="tile-label">Animated</div>
         </div>
 
-        <!-- 2. Illustration -->
-        <div class="project-tile" data-category="motion" onclick="openModal('illustration')">
-          <div class="tile-icon">✏️</div>
-          <img class="tile-img" src="images/illustration/01.jpg" alt=""
-               onerror="this.style.display='none'">
+        <!-- 2. DRAWN -->
+        <div class="project-tile" data-category="motion-illustration" onclick="openModal('drawn')">
+          <img class="tile-img" src="images/thumbnails/02.jpg" alt="Drawn">
           <div class="tile-pink-overlay"></div>
-          <div class="tile-label">Illustration</div>
+          <div class="tile-label">Drawn</div>
         </div>
 
-        <!-- 3. Food Labels -->
-        <div class="project-tile" data-category="product" onclick="openModal('food-labels')">
-          <div class="tile-icon">🏷️</div>
-          <img class="tile-img" src="images/food-labels/01.jpg" alt=""
-               onerror="this.style.display='none'">
+        <!-- 3. ILLUSTRATED -->
+        <div class="project-tile" data-category="motion-illustration" onclick="openModal('illustrated')">
+          <img class="tile-img" src="images/thumbnails/03.jpg" alt="Illustrated">
           <div class="tile-pink-overlay"></div>
-          <div class="tile-label">Food Labels</div>
+          <div class="tile-label">Illustrated</div>
         </div>
 
-        <!-- 4. Logo Design -->
+        <!-- 4. PAINTED -->
+        <div class="project-tile" data-category="motion-illustration" onclick="openModal('painted')">
+          <img class="tile-img" src="images/thumbnails/04.jpg" alt="Painted">
+          <div class="tile-pink-overlay"></div>
+          <div class="tile-label">Painted</div>
+        </div>
+
+        <!-- 5. VIDEO EDITING -->
+        <div class="project-tile" data-category="digital" onclick="openModal('video-editing')">
+          <img class="tile-img" src="images/thumbnails/05.jpg" alt="Video Editing">
+          <div class="tile-pink-overlay"></div>
+          <div class="tile-label">Video Editing</div>
+        </div>
+
+        <!-- 6. WEBSITE LAYOUT -->
+        <div class="project-tile" data-category="digital" onclick="openModal('website-layout')">
+          <img class="tile-img" src="images/thumbnails/06.jpg" alt="Website Layout">
+          <div class="tile-pink-overlay"></div>
+          <div class="tile-label">Website Layout</div>
+        </div>
+
+        <!-- 7. SOCIAL MEDIA -->
+        <div class="project-tile" data-category="digital" onclick="openModal('social-media')">
+          <img class="tile-img" src="images/thumbnails/07.jpg" alt="Social Media">
+          <div class="tile-pink-overlay"></div>
+          <div class="tile-label">Social Media</div>
+        </div>
+
+        <!-- 8. CONTENT WRITING -->
+        <div class="project-tile" data-category="digital" onclick="openModal('content-writing')">
+          <img class="tile-img" src="images/thumbnails/08.jpg" alt="Content Writing">
+          <div class="tile-pink-overlay"></div>
+          <div class="tile-label">Content Writing</div>
+        </div>
+
+        <!-- 9. FOOD LABEL DESIGN -->
+        <div class="project-tile" data-category="branding" onclick="openModal('food-labels')">
+          <img class="tile-img" src="images/thumbnails/09.jpg" alt="Food Label Design">
+          <div class="tile-pink-overlay"></div>
+          <div class="tile-label">Food Label Design</div>
+        </div>
+
+        <!-- 10. LOGO DESIGN -->
         <div class="project-tile" data-category="branding" onclick="openModal('logo-design')">
-          <div class="tile-icon">⬡</div>
-          <img class="tile-img" src="images/logo-design/01.jpg" alt=""
-               onerror="this.style.display='none'">
+          <img class="tile-img" src="images/thumbnails/10.jpg" alt="Logo Design">
           <div class="tile-pink-overlay"></div>
           <div class="tile-label">Logo Design</div>
         </div>
 
-        <!-- 5. Textile Design -->
-        <div class="project-tile" data-category="textile" onclick="openModal('textile')">
-          <div class="tile-icon">🧵</div>
-          <img class="tile-img" src="images/textile/01.jpg" alt=""
-               onerror="this.style.display='none'">
+        <!-- 11. TEXTILE DESIGN -->
+        <div class="project-tile" data-category="branding" onclick="openModal('textile-design')">
+          <img class="tile-img" src="images/thumbnails/11.jpg" alt="Textile Design">
           <div class="tile-pink-overlay"></div>
           <div class="tile-label">Textile Design</div>
         </div>
 
-        <!-- 6. Fancy Dress -->
-        <div class="project-tile" data-category="product" onclick="openModal('fancy-dress')">
-          <div class="tile-icon">🎭</div>
-          <img class="tile-img" src="images/fancy-dress/01.jpg" alt=""
-               onerror="this.style.display='none'">
+        <!-- 12. LAYOUT -->
+        <div class="project-tile" data-category="branding" onclick="openModal('layout')">
+          <img class="tile-img" src="images/thumbnails/12.jpg" alt="Layout">
           <div class="tile-pink-overlay"></div>
-          <div class="tile-label">Fancy Dress</div>
-        </div>
-
-        <!-- 7. Food Lover's Market -->
-        <div class="project-tile" data-category="branding" onclick="openModal('seafood')">
-          <div class="tile-icon">🐟</div>
-          <img class="tile-img" src="images/seafood/01.jpg" alt=""
-               onerror="this.style.display='none'">
-          <div class="tile-pink-overlay"></div>
-          <div class="tile-label">Food Lover's Market</div>
-        </div>
-
-        <!-- 8. Branding -->
-        <div class="project-tile" data-category="branding" onclick="openModal('branding')">
-          <div class="tile-icon">🎨</div>
-          <img class="tile-img" src="images/branding/01.jpg" alt=""
-               onerror="this.style.display='none'">
-          <div class="tile-pink-overlay"></div>
-          <div class="tile-label">Branding</div>
-        </div>
-
-        <!-- 9. Social Media (coming soon) -->
-        <div class="project-tile" data-category="digital" onclick="openModal('social')">
-          <div class="tile-icon">📱</div>
-          <img class="tile-img" src="images/social/01.jpg" alt=""
-               onerror="this.style.display='none'">
-          <div class="tile-pink-overlay"></div>
-          <div class="tile-label">Social Media</div>
-          <div class="tile-soon">Soon</div>
-        </div>
-
-        <!-- 10. Website Layout (coming soon) -->
-        <div class="project-tile" data-category="digital" onclick="openModal('web')">
-          <div class="tile-icon">🌐</div>
-          <img class="tile-img" src="images/web/01.jpg" alt=""
-               onerror="this.style.display='none'">
-          <div class="tile-pink-overlay"></div>
-          <div class="tile-label">Website Layout</div>
-          <div class="tile-soon">Soon</div>
-        </div>
-
-        <!-- 11. Video Editing (coming soon) -->
-        <div class="project-tile" data-category="motion" onclick="openModal('video')">
-          <div class="tile-icon">🎞️</div>
-          <img class="tile-img" src="images/video/01.jpg" alt=""
-               onerror="this.style.display='none'">
-          <div class="tile-pink-overlay"></div>
-          <div class="tile-label">Video Editing</div>
-          <div class="tile-soon">Soon</div>
-        </div>
-
-        <!-- 12. Drawn & Painted (coming soon) -->
-        <div class="project-tile" data-category="motion" onclick="openModal('drawn')">
-          <div class="tile-icon">🖌️</div>
-          <img class="tile-img" src="images/drawn/01.jpg" alt=""
-               onerror="this.style.display='none'">
-          <div class="tile-pink-overlay"></div>
-          <div class="tile-label">Drawn &amp; Painted</div>
-          <div class="tile-soon">Soon</div>
+          <div class="tile-label">Layout + Signage</div>
         </div>
 
       </div>
@@ -1210,83 +1225,26 @@
       });
     });
 
-    /* ---- PROJECT DATA ---- */
+    /* ---- PROJECT DATA — matches Linda's 12 ALL WORK thumbnails ---- */
     const PROJECTS = {
-      animation: {
-        title: 'Motion & Animation',
-        desc:  'Bringing brands and stories to life through motion design and animation.',
-        folder:'images/animation',
-        count: 8
-      },
-      illustration: {
-        title: 'Illustration',
-        desc:  'Character and editorial illustration across a range of styles and media.',
-        folder:'images/illustration',
-        count: 8
-      },
-      'food-labels': {
-        title: 'Food Labels',
-        desc:  'Product label design for honey, bacon, coffee, tuna, and more.',
-        folder:'images/food-labels',
-        count: 12
-      },
-      'logo-design': {
-        title: 'Logo Design',
-        desc:  'Logo and brand identity design — including the full Isabelo brand suite.',
-        folder:'images/logo-design',
-        count: 17
-      },
-      textile: {
-        title: 'Textile Design',
-        desc:  'Pattern and textile design for print and fabric — featuring Small Dog and other collections.',
-        folder:'images/textile',
-        count: 5
-      },
-      'fancy-dress': {
-        title: 'Fancy Dress',
-        desc:  'Costume design illustrations for the Medium Dog fancy dress collection.',
-        folder:'images/fancy-dress',
-        count: 7
-      },
-      seafood: {
-        title: "Food Lover's Market",
-        desc:  'Branding and packaging design for a seafood and liquor retail brand.',
-        folder:'images/seafood',
-        count: 12
-      },
-      branding: {
-        title: 'Branding',
-        desc:  'Full brand identity and collateral design projects.',
-        folder:'images/branding',
-        count: 8
-      },
-      social: {
-        title: 'Social Media',
-        desc:  'Social media content, templates, and campaign graphics.',
-        folder:'images/social',
-        count: 8
-      },
-      web: {
-        title: 'Website Layout',
-        desc:  'Web and UI design concepts, wireframes, and page layouts.',
-        folder:'images/web',
-        count: 6
-      },
-      video: {
-        title: 'Video Editing',
-        desc:  'Video editing and post-production work.',
-        folder:'images/video',
-        count: 6
-      },
-      drawn: {
-        title: 'Drawn & Painted',
-        desc:  'Traditional and digital drawing and painting.',
-        folder:'images/drawn',
-        count: 8
-      },
+      'animated':        { title:'Animated',         desc:'Animated motion work — bringing brands and stories to life through movement.', folder:'images/animated',         thumb:'images/thumbnails/01.gif', maxCount:12 },
+      'drawn':           { title:'Drawn',            desc:'Hand-drawn illustrations across editorial and brand work.',                       folder:'images/drawn',            thumb:'images/thumbnails/02.jpg', maxCount:12 },
+      'illustrated':     { title:'Illustrated',      desc:'Digital illustration spanning character, editorial, and decorative styles.',     folder:'images/illustrated',      thumb:'images/thumbnails/03.jpg', maxCount:12 },
+      'painted':         { title:'Painted',          desc:'Painted work — traditional and digital painting and texture studies.',           folder:'images/painted',          thumb:'images/thumbnails/04.jpg', maxCount:12 },
+      'video-editing':   { title:'Video Editing',    desc:'Video editing and post-production for brand and social content.',                folder:'images/video-editing',    thumb:'images/thumbnails/05.jpg', maxCount:12 },
+      'website-layout':  { title:'Website Layout',   desc:'Web layouts, UI concepts, and page design.',                                     folder:'images/website-layout',   thumb:'images/thumbnails/06.jpg', maxCount:12 },
+      'social-media':    { title:'Social Media',     desc:'Social media content, templates, and campaign graphics.',                        folder:'images/social-media',     thumb:'images/thumbnails/07.jpg', maxCount:12 },
+      'content-writing': { title:'Content Writing',  desc:'Copywriting and editorial content for brands and campaigns.',                    folder:'images/content-writing',  thumb:'images/thumbnails/08.jpg', maxCount:12 },
+      'food-labels':     { title:'Food Label Design',desc:'Product label design — honey, bacon, coffee, tuna and more.',                    folder:'images/food-labels',      thumb:'images/thumbnails/09.jpg', maxCount:12 },
+      'logo-design':     { title:'Logo Design',      desc:'Logo and brand identity design across multiple sectors.',                        folder:'images/logo-design',      thumb:'images/thumbnails/10.jpg', maxCount:20 },
+      'textile-design':  { title:'Textile Design',   desc:'Pattern and textile design for print and fabric applications.',                  folder:'images/textile-design',   thumb:'images/thumbnails/11.jpg', maxCount:12 },
+      'layout':          { title:'Layout + Signage', desc:'Editorial layout, signage, and applied brand collateral.',                       folder:'images/layout',           thumb:'images/thumbnails/12.jpg', maxCount:12 },
     };
 
-    /* ---- MODAL OPEN ---- */
+    /* ---- MODAL OPEN ----
+       Strategy: probe images sequentially. Show all that load.
+       If none load, fall back to the thumbnail + "Gallery coming soon" message.
+    */
     function openModal(key) {
       const p = PROJECTS[key];
       if (!p) return;
@@ -1295,27 +1253,61 @@
       document.getElementById('modalDesc').textContent  = p.desc;
 
       const grid = document.getElementById('modalGrid');
-      grid.innerHTML = '';
-
-      for (let i = 1; i <= p.count; i++) {
-        const num = String(i).padStart(2, '0');
-        const src = `${p.folder}/${num}.jpg`;
-        const item = document.createElement('div');
-        item.className = 'modal-item';
-        item.innerHTML =
-          `<img src="${src}" alt="${p.title} ${num}"
-                loading="lazy"
-                onclick="openLightbox(this.src)"
-                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-           <div class="modal-item-ph" style="display:none;">
-             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-             <span>${num}.jpg</span>
-           </div>`;
-        grid.appendChild(item);
-      }
+      grid.innerHTML = '<div class="modal-loading">Loading gallery…</div>';
 
       document.getElementById('modalOverlay').classList.add('open');
       document.body.style.overflow = 'hidden';
+
+      // Probe candidate images (try .jpg, .png, .gif at each index)
+      const exts = ['jpg','png','gif','jpeg'];
+      const probes = [];
+      for (let i = 1; i <= p.maxCount; i++) {
+        const num = String(i).padStart(2, '0');
+        probes.push(probeImage(p.folder, num, exts));
+      }
+
+      Promise.all(probes).then(results => {
+        const found = results.filter(Boolean);
+        grid.innerHTML = '';
+
+        if (found.length === 0) {
+          // Empty folder — show thumbnail hero + coming-soon message
+          grid.classList.add('single-hero');
+          grid.innerHTML =
+            `<div class="modal-hero">
+               <img src="${p.thumb}" alt="${p.title}" onclick="openLightbox(this.src)">
+             </div>
+             <div class="modal-coming-soon">
+               <strong>Full gallery coming soon</strong>
+               <span>Linda is adding more ${p.title.toLowerCase()} work here — check back!</span>
+             </div>`;
+        } else {
+          grid.classList.remove('single-hero');
+          found.forEach(src => {
+            const item = document.createElement('div');
+            item.className = 'modal-item';
+            item.innerHTML =
+              `<img src="${src}" alt="${p.title}" loading="lazy" onclick="openLightbox(this.src)">`;
+            grid.appendChild(item);
+          });
+        }
+      });
+    }
+
+    /* Probe one filename across extensions; resolve with the first that loads, or null */
+    function probeImage(folder, num, exts) {
+      return new Promise(resolve => {
+        let i = 0;
+        const tryNext = () => {
+          if (i >= exts.length) { resolve(null); return; }
+          const src = `${folder}/${num}.${exts[i++]}`;
+          const img = new Image();
+          img.onload = () => resolve(src);
+          img.onerror = tryNext;
+          img.src = src;
+        };
+        tryNext();
+      });
     }
 
     /* ---- MODAL CLOSE ---- */
