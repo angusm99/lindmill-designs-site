@@ -242,7 +242,7 @@
     }
 
     .home-divider {
-      width: 60px;
+      width: 120px;
       height: 3px;
       background: var(--pink);
       border-radius: 2px;
@@ -262,7 +262,8 @@
     .home-btn-contact {
       position: absolute;
       top: 1.2rem;
-      left: 1.2rem;
+      left: 50%;
+      transform: translateX(-50%);
       z-index: 10;
     }
     .home-btn-work {
@@ -919,7 +920,7 @@
     </div>
 
     <!-- Work button (bottom) -->
-    <button class="btn-lime home-btn-work" onclick="showPage('work')">See My Work &darr;</button>
+    <button class="btn-lime home-btn-work" onclick="showPage('work')">See My Work</button>
 
   </section>
 
