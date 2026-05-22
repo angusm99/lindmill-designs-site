@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lindmill Designs — Motion Design & Illustration</title>
+  <meta name="description" content="Linda Miller — brand-focused motion designer and illustrator specialising in branding, motion design, and visual storytelling.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Nunito:wght@400;600;800;900&display=swap" rel="stylesheet">
+
+  <style>
+
+    /* ================================================
+       RESET & CSS VARIABLES
+    ================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:  #06102e;
+      --navy2: #0d1f5c;
+      --lime:  #c7ff3e;
+      --pink:  #ff3d96;
+      --ink:   #0e1729;
+      --white: #ffffff;
+      --fish:  #0a1540;
+    }
+
+    html { font-size: 16px; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--navy);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ================================================
+       PAGE SWITCH SYSTEM
+    ================================================ */
+    .page {
+      display: none;
+      min-height: 100svh;
+      width: 100%;
+      flex-direction: column;
+    }
+    .page.active { display: flex; }
+
+    /* ================================================
+       SHARED BUTTONS
+    ================================================ */
+    .btn-lime {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 22px;
+      border: 2px solid var(--lime);
+      color: var(--lime);
+      background: transparent;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      line-height: 1;
+    }
+    .btn-lime:hover { background: var(--lime); color: var(--navy); }
+
+    .btn-pink {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 22px;
+      background: var(--pink);
+      color: var(--white);
+      border: 2px solid var(--pink);
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+      line-height: 1;
+    }
+    .btn-pink:hover { background: #d4277e; border-color: #d4277e; }
+
+    /* ================================================
+       PAGE HEADER (shared by Work + About)
+    ================================================ */
+    .site-header {
+      background: var(--navy);
+      padding: 0.85rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      border-bottom: 2px solid var(--navy2);
+      flex-shrink: 0;
+    }
+
+    .header-logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background: var(--navy2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .header-logo img { width: 100%; height: 100%; object-fit: contain; }
+    .header-logo-text {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.5rem;
+      color: var(--lime);
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .header-nav-link {
+      background: none;
+      border: none;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      padding: 6px 10px;
+      border-radius: 4px;
+      transition: color 0.2s;
+      line-height: 1;
+    }
+    .header-nav-link:hover { color: var(--lime); }
+
+    /* ================================================
+       HOME PAGE
+    ================================================ */
+    #home {
+      position: relative;
+      background: #0d1b4b;
+      min-height: 100svh;
+      overflow: hidden;
+      align-items: stretch;
+    }
+
+    .home-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .home-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+      background: #0d1b4b;
+    }
+
+    /* Dark radial overlay so wordmark pops */
+    .home-vignette {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 38%,
+        rgba(6,16,46,0.55) 0%,
+        rgba(6,16,46,0.72) 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Twinkling stars layer */
+    .home-stars {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+    }
+    .star {
+      position: absolute;
+      color: white;
+      animation: twinkle var(--dur, 3s) var(--del, 0s) infinite alternate;
+    }
+    @keyframes twinkle {
+      from { opacity: var(--lo, 0.2); transform: scale(0.85); }
+      to   { opacity: var(--hi, 1);   transform: scale(1.15); }
+    }
+
+    /* Wordmark + tagline centred block */
+    .home-centre {
+      position: relative;
+      z-index: 5;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 5rem 2rem 8rem;
+      text-align: center;
+    }
+
+    .wordmark {
+      font-family: 'Fredoka', sans-serif;
+      font-size: clamp(52px, 14vw, 148px);
+      font-weight: 700;
+      color: var(--lime);
+      line-height: 0.88;
+      letter-spacing: -0.02em;
+      text-shadow: 0 0 80px rgba(199,255,62,0.25), 0 2px 0 rgba(0,0,0,0.4);
+      user-select: none;
+    }
+    .wordmark-sub {
+      font-family: 'Fredoka', sans-serif;
+      font-size: clamp(22px, 5.5vw, 62px);
+      font-weight: 700;
+      color: var(--lime);
+      letter-spacing: 0.22em;
+      margin-top: 0.1em;
+      text-shadow: 0 0 60px rgba(199,255,62,0.2);
+      user-select: none;
+    }
+
+    .home-divider {
+      width: 60px;
+      height: 3px;
+      background: var(--pink);
+      border-radius: 2px;
+      margin: 1.4rem auto;
+      opacity: 0.9;
+    }
+
+    .home-tagline {
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(13px, 2.2vw, 21px);
+      font-weight: 600;
+      color: rgba(255,255,255,0.78);
+      letter-spacing: 0.06em;
+    }
+
+    /* Fixed corner / edge buttons on home */
+    .home-btn-contact {
+      position: absolute;
+      top: 1.2rem;
+      left: 1.2rem;
+      z-index: 10;
+    }
+    .home-btn-work {
+      position: absolute;
+      bottom: 1.8rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      white-space: nowrap;
+    }
+
+    /* SVG blade animation */
+    #svgBlades {
+      animation: spin 5.5s linear infinite;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    /* ================================================
+       WORK PAGE
+    ================================================ */
+    #work { background: var(--white); }
+
+    .work-body {
+      flex: 1;
+      padding: 2.5rem 2rem 3rem;
+      max-width: 1120px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .work-heading {
+      font-family: 'Fredoka', sans-serif;
+      font-size: clamp(2.8rem, 9vw, 5.5rem);
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 0.9;
+      margin-bottom: 0.6rem;
+    }
+
+    .work-intro {
+      font-size: 0.98rem;
+      color: #555;
+      max-width: 640px;
+      line-height: 1.7;
+      margin-bottom: 0.5rem;
+    }
+
+    .work-hint {
+      font-size: 0.85rem;
+      font-style: italic;
+      color: var(--pink);
+      margin-bottom: 1.6rem;
+    }
+
+    /* Filter pills */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-bottom: 1.8rem;
+    }
+    .filter-pill {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 5px 16px;
+      border: 2px solid var(--navy);
+      color: var(--navy);
+      background: transparent;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.18s;
+      line-height: 1.4;
+    }
+    .filter-pill:hover,
+    .filter-pill.active {
+      background: var(--pink);
+      border-color: var(--pink);
+      color: var(--white);
+    }
+
+    /* Project grid */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .project-tile {
+      position: relative;
+      aspect-ratio: 1;
+      overflow: hidden;
+      cursor: pointer;
+      border-radius: 6px;
+      background: #1e1255; /* fallback */
+    }
+
+    /* Coloured backgrounds per tile position */
+    .project-tile:nth-child(8n+1) { background: #2d1b69; }
+    .project-tile:nth-child(8n+2) { background: #1a0f5c; }
+    .project-tile:nth-child(8n+3) { background: #3d0f72; }
+    .project-tile:nth-child(8n+4) { background: #0d2b8c; }
+    .project-tile:nth-child(8n+5) { background: #4a0e4e; }
+    .project-tile:nth-child(8n+6) { background: #441460; }
+    .project-tile:nth-child(8n+7) { background: #5c0e3d; }
+    .project-tile:nth-child(8n+0) { background: #1e3a5f; }
+
+    .tile-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+      transition: transform 0.4s ease;
+    }
+    .project-tile:hover .tile-img { transform: scale(1.06); }
+
+    /* Pink duotone hover overlay */
+    .tile-pink-overlay {
+      position: absolute;
+      inset: 0;
+      background: var(--pink);
+      mix-blend-mode: multiply;
+      opacity: 0.5;
+      z-index: 2;
+      transition: opacity 0.3s;
+    }
+    .project-tile:hover .tile-pink-overlay { opacity: 0.22; }
+
+    /* Placeholder icon (shown when no image) */
+    .tile-icon {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      opacity: 0.22;
+    }
+
+    /* Label at bottom */
+    .tile-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 2.5rem 0.7rem 0.65rem;
+      background: linear-gradient(transparent, rgba(6,16,46,0.82));
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--lime);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+      z-index: 3;
+      line-height: 1.2;
+    }
+
+    /* Coming soon badge */
+    .tile-soon {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      z-index: 4;
+      background: rgba(255,61,150,0.85);
+      color: white;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 100px;
+    }
+
+    /* Work page footer */
+    .work-footer {
+      background: var(--navy);
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-shrink: 0;
+      flex-wrap: wrap;
+    }
+
+    /* ================================================
+       ABOUT / CONTACT PAGE
+    ================================================ */
+    #about { background: var(--navy); }
+
+    .about-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 3rem 2rem 3rem;
+      max-width: 680px;
+      margin: 0 auto;
+      width: 100%;
+      text-align: center;
+    }
+
+    /* Logo badge */
+    .about-badge {
+      width: 88px;
+      height: 88px;
+      border-radius: 16px;
+      background: var(--navy2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin-bottom: 2rem;
+      border: 2px solid rgba(199,255,62,0.2);
+    }
+    .about-badge img { width: 100%; height: 100%; object-fit: contain; }
+    .about-badge-text {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.55rem;
+      color: var(--lime);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    .about-hello {
+      font-family: 'Fredoka', sans-serif;
+      font-size: clamp(3.5rem, 13vw, 6.5rem);
+      font-weight: 700;
+      color: var(--lime);
+      line-height: 0.9;
+      margin-bottom: 1.6rem;
+    }
+
+    .about-bio {
+      font-size: 0.98rem;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.82);
+      margin-bottom: 1rem;
+      text-align: left;
+      max-width: 560px;
+    }
+
+    .about-contact-line {
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.5);
+      margin: 1.2rem 0 0.6rem;
+    }
+
+    .about-email {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--pink);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: opacity 0.2s;
+    }
+    .about-email:hover { opacity: 0.75; }
+
+    /* 2-col photo grid */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      width: 100%;
+      max-width: 560px;
+      margin: 2rem auto 0;
+    }
+    .photo-card {
+      aspect-ratio: 4/3;
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--navy2);
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+    .photo-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .photo-ph {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.25);
+      font-size: 0.75rem;
+    }
+    .photo-ph span:first-child { font-size: 2rem; }
+
+    /* Social bar */
+    .social-bar {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      margin-top: 2.2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      width: 100%;
+      max-width: 560px;
+    }
+    .social-bar a {
+      color: rgba(255,255,255,0.38);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .social-bar a:hover { color: var(--pink); }
+
+    /* About footer */
+    .about-footer {
+      padding: 1.4rem 2rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-shrink: 0;
+      flex-wrap: wrap;
+    }
+
+    /* ================================================
+       MODAL
+    ================================================ */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(6,16,46,0.93);
+      z-index: 999;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 2rem 1rem 3rem;
+      overflow-y: auto;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s;
+    }
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-card {
+      background: var(--white);
+      border-radius: 14px;
+      max-width: 760px;
+      width: 100%;
+      padding: 2.2rem 2rem 2rem;
+      position: relative;
+      margin: auto 0;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: -15px;
+      right: -15px;
+      width: 42px;
+      height: 42px;
+      background: var(--pink);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 1.3rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      transition: background 0.2s;
+      box-shadow: 0 4px 12px rgba(255,61,150,0.4);
+    }
+    .modal-close:hover { background: #c0254a; }
+
+    .modal-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.35rem;
+    }
+
+    .modal-desc {
+      font-size: 0.9rem;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 8px;
+    }
+
+    .modal-item {
+      aspect-ratio: 1;
+      border-radius: 6px;
+      overflow: hidden;
+      background: #f0effa;
+      cursor: zoom-in;
+    }
+    .modal-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s;
+    }
+    .modal-item:hover img { transform: scale(1.05); }
+    .modal-item-ph {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      color: #bbb;
+      font-size: 0.65rem;
+      text-align: center;
+      padding: 6px;
+    }
+    .modal-item-ph svg { opacity: 0.35; }
+
+    /* Lightbox (single image zoom) */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.94);
+      z-index: 1001;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      cursor: zoom-out;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 100%;
+      max-height: 90vh;
+      border-radius: 6px;
+      object-fit: contain;
+      cursor: zoom-out;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 44px;
+      height: 44px;
+      background: var(--pink);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      font-size: 1.4rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ================================================
+       RESPONSIVE
+    ================================================ */
+    @media (max-width: 700px) {
+      .project-grid { grid-template-columns: repeat(2, 1fr); gap: 5px; }
+      .modal-grid   { grid-template-columns: repeat(2, 1fr); }
+      .work-body    { padding: 1.8rem 1rem 2.5rem; }
+      .about-body   { padding: 2rem 1rem 2.5rem; }
+      .modal-card   { padding: 1.6rem 1rem 1.5rem; }
+      .modal-close  { top: 8px; right: 8px; }
+      .header-nav-link { font-size: 0.82rem; padding: 6px 6px; }
+      .wordmark     { letter-spacing: -0.03em; }
+    }
+
+    @media (max-width: 440px) {
+      .modal-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       HOME PAGE
+  ============================================================ -->
+  <section class="page active" id="home">
+
+    <!-- Scenic SVG background -->
+    <svg class="home-svg" viewBox="0 0 400 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stop-color="#0d1b4b"/>
+          <stop offset="48%"  stop-color="#1a3a7c"/>
+          <stop offset="70%"  stop-color="#2e7fcb"/>
+          <stop offset="84%"  stop-color="#6ec6e0"/>
+          <stop offset="100%" stop-color="#a8dcea"/>
+        </linearGradient>
+      </defs>
+
+      <!-- Sky -->
+      <rect width="400" height="700" fill="url(#skyGrad)"/>
+
+      <!-- Stars (small dots) -->
+      <circle cx="50"  cy="80"  r="2"   fill="white" opacity="0.9"/>
+      <circle cx="120" cy="40"  r="1.5" fill="white" opacity="0.8"/>
+      <circle cx="350" cy="60"  r="2"   fill="white" opacity="0.7"/>
+      <circle cx="300" cy="120" r="1.5" fill="white" opacity="0.9"/>
+      <circle cx="180" cy="30"  r="1"   fill="white" opacity="0.6"/>
+      <circle cx="80"  cy="150" r="1.5" fill="white" opacity="0.8"/>
+      <circle cx="240" cy="90"  r="1"   fill="white" opacity="0.7"/>
+      <circle cx="160" cy="200" r="1.2" fill="white" opacity="0.5"/>
+      <circle cx="360" cy="190" r="1.5" fill="white" opacity="0.8"/>
+      <circle cx="30"  cy="220" r="1"   fill="white" opacity="0.6"/>
+
+      <!-- Starburst sparkles (✦) -->
+      <g fill="white" opacity="0.92" transform="translate(55,100) scale(0.9)">
+        <polygon points="0,-12 2,-2 12,0 2,2 0,12 -2,2 -12,0 -2,-2"/>
+      </g>
+      <g fill="white" opacity="0.85" transform="translate(372,155) scale(1.1)">
+        <polygon points="0,-12 2,-2 12,0 2,2 0,12 -2,2 -12,0 -2,-2"/>
+      </g>
+      <g fill="white" opacity="0.9" transform="translate(322,70) scale(0.7)">
+        <polygon points="0,-12 2,-2 12,0 2,2 0,12 -2,2 -12,0 -2,-2"/>
+      </g>
+      <g fill="white" opacity="0.72" transform="translate(148,162) scale(0.6)">
+        <polygon points="0,-12 2,-2 12,0 2,2 0,12 -2,2 -12,0 -2,-2"/>
+      </g>
+      <g fill="white" opacity="0.78" transform="translate(28,312) scale(0.85)">
+        <polygon points="0,-12 2,-2 12,0 2,2 0,12 -2,2 -12,0 -2,-2"/>
+      </g>
+      <g fill="white" opacity="0.65" transform="translate(205,55) scale(0.55)">
+        <polygon points="0,-12 2,-2 12,0 2,2 0,12 -2,2 -12,0 -2,-2"/>
+      </g>
+
+      <!-- Rainbow behind windmill -->
+      <g transform="translate(200,492)">
+        <path d="M -82,0 A 82,82 0 0,1 82,0"  fill="none" stroke="#e63946" stroke-width="13"/>
+        <path d="M -68,0 A 68,68 0 0,1 68,0"  fill="none" stroke="#f4a261" stroke-width="13"/>
+        <path d="M -54,0 A 54,54 0 0,1 54,0"  fill="none" stroke="#f9e42b" stroke-width="13"/>
+        <path d="M -40,0 A 40,40 0 0,1 40,0"  fill="none" stroke="#2ec4b6" stroke-width="13"/>
+        <path d="M -26,0 A 26,26 0 0,1 26,0"  fill="none" stroke="#b8e0ff" stroke-width="13"/>
+      </g>
+
+      <!-- Hills (back) -->
+      <ellipse cx="80"  cy="562" rx="132" ry="80" fill="#3a8c3f"/>
+      <ellipse cx="338" cy="552" rx="122" ry="76" fill="#2d7a32"/>
+      <!-- Hill centre -->
+      <ellipse cx="200" cy="572" rx="162" ry="72" fill="#4aaa4f"/>
+
+      <!-- Windmill tower -->
+      <rect x="193" y="422" width="14" height="100" rx="4" fill="#d4758a"/>
+
+      <!-- Windmill blades (animated) -->
+      <g id="svgBlades" transform="translate(200,422)">
+        <rect x="-5" y="-46" width="10" height="46" rx="4" fill="#7a9db5"/>
+        <rect x="-5" y="0"   width="10" height="46" rx="4" fill="#7a9db5"/>
+        <rect x="-46" y="-5" width="46" height="10" rx="4" fill="#7a9db5"/>
+        <rect x="0"   y="-5" width="46" height="10" rx="4" fill="#7a9db5"/>
+      </g>
+
+      <!-- Foreground ground -->
+      <rect x="0" y="582" width="400" height="118" fill="#4aaa4f"/>
+
+      <!-- River waves -->
+      <path d="M 0,592 Q 50,577 100,587 Q 150,597 200,584 Q 250,572 300,582 Q 350,592 400,580 L 400,612 Q 350,624 300,614 Q 250,604 200,616 Q 150,628 100,618 Q 50,608 0,620 Z" fill="#5aaac8"/>
+      <path d="M 0,620 Q 60,607 120,617 Q 180,627 240,615 Q 300,603 360,613 L 400,610 L 400,642 Q 360,654 300,644 Q 240,634 180,646 Q 120,658 60,648 Q 30,642 0,650 Z" fill="#4a9ab8"/>
+      <path d="M 0,650 Q 70,637 140,647 Q 210,657 280,645 Q 340,635 400,645 L 400,700 L 0,700 Z" fill="#3a8aa8"/>
+
+      <!-- Green stripes over water -->
+      <path d="M 60,600 Q 110,592 160,600 Q 210,608 260,598 Q 300,590 340,598 L 340,610 Q 300,602 260,610 Q 210,620 160,612 Q 110,604 60,612 Z" fill="#4aaa4f" opacity="0.65"/>
+      <path d="M 20,632 Q 80,624 140,632 Q 200,640 260,630 Q 320,620 380,628 L 380,640 Q 320,632 260,642 Q 200,652 140,644 Q 80,636 20,644 Z" fill="#4aaa4f" opacity="0.65"/>
+    </svg>
+
+    <!-- Hero video (overlays the SVG; SVG shows through as fallback if video fails) -->
+    <video class="home-video" autoplay muted loop playsinline poster=""
+           onerror="this.style.display='none'">
+      <source src="videos/hero.mp4" type="video/mp4">
+    </video>
+
+    <!-- Overlay vignette -->
+    <div class="home-vignette"></div>
+
+    <!-- Extra twinkling stars (generated by JS) -->
+    <div class="home-stars" id="starsContainer"></div>
+
+    <!-- Contact button (top-left) -->
+    <button class="btn-lime home-btn-contact" onclick="showPage('about')">Contact</button>
+
+    <!-- Central wordmark block -->
+    <div class="home-centre">
+      <div class="wordmark">LINDMILL</div>
+      <div class="wordmark-sub">DESIGNS</div>
+      <div class="home-divider"></div>
+      <p class="home-tagline">Motion Design + Visual Storytelling</p>
+    </div>
+
+    <!-- Work button (bottom) -->
+    <button class="btn-lime home-btn-work" onclick="showPage('work')">See My Work &darr;</button>
+
+  </section>
+
+
+  <!-- ============================================================
+       WORK PAGE
+  ============================================================ -->
+  <section class="page" id="work">
+
+    <header class="site-header">
+      <div class="header-logo" onclick="showPage('home')" title="Home">
+        <img src="images/logo.gif" alt="Lindmill"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="header-logo-text" style="display:none;">LIND<br>MILL</div>
+      </div>
+      <nav class="header-nav">
+        <button class="header-nav-link" onclick="showPage('home')">Home</button>
+        <button class="btn-pink" style="padding:7px 16px; font-size:0.85rem;" onclick="showPage('about')">Contact</button>
+      </nav>
+    </header>
+
+    <div class="work-body">
+
+      <h1 class="work-heading">ALL WORK</h1>
+      <p class="work-intro">Brand-focused motion designer and illustrator — specialising in branding, visual storytelling, and bringing ideas to life through design and motion.</p>
+      <p class="work-hint">*Select a project to view the full gallery.</p>
+
+      <!-- Category filter pills -->
+      <div class="filter-bar">
+        <button class="filter-pill active" data-filter="all">All</button>
+        <button class="filter-pill" data-filter="motion">Motion</button>
+        <button class="filter-pill" data-filter="branding">Branding</button>
+        <button class="filter-pill" data-filter="product">Product</button>
+        <button class="filter-pill" data-filter="digital">Digital</button>
+        <button class="filter-pill" data-filter="textile">Textile</button>
+      </div>
+
+      <!-- 4-column project grid -->
+      <div class="project-grid" id="projectGrid">
+
+        <!-- 1. Motion & Animation -->
+        <div class="project-tile" data-category="motion" onclick="openModal('animation')">
+          <div class="tile-icon">🎬</div>
+          <img class="tile-img" src="images/animation/01.jpg" alt=""
+               onerror="this.style.display='none'">
+          <div class="tile-pink-overlay"></div>
+          <div class="tile-label">Motion &amp; Animation</div>
+        </div>
+
+        <!-- 2. Illustration -->
+        <div class="project-tile" data-category="motion" onclick="openModal('illustration')">
+          <div class="tile-icon">✏️</div>
+          <img class="tile-img" src="images/illustration/01.jpg" alt=""
+               onerror="this.style.display='none'">
+          <div class="tile-pink-overlay"></div>
+          <div class="tile-label">Illustration</div>
+        </div>
+
+        <!-- 3. Food Labels -->
+        <div class="project-tile" data-category="product" onclick="openModal('food-labels')">
+          <div class="tile-icon">🏷️</div>
+          <img class="tile-img" src="images/food-labels/01.jpg" alt=""
+               onerror="this.style.display='none'">
+          <div class="tile-pink-overlay"></div>
+          <div class="tile-label">Food Labels</div>
+        </div>
+
+        <!-- 4. Logo Design -->
+        <div class="project-tile" data-category="branding" onclick="openModal('logo-design')">
+          <div class="tile-icon">⬡</div>
+          <img class="tile-img" src="images/logo-design/01.jpg" alt=""
+               onerror="this.style.display='none'">
+          <div class="tile-pink-overlay"></div>
+          <div class="tile-label">Logo Design</div>
+        </div>
+
+        <!-- 5. Textile Design -->
+        <div class="project-tile" data-category="textile" onclick="openModal('textile')">
+          <div class="tile-icon">🧵</div>
+          <img class="tile-img" src="images/textile/01.jpg" alt=""
+               onerror="this.style.display='none'">
+          <div class="tile-pink-overlay"></div>
+          <div class="tile-label">Textile Design</div>
+        </div>
+
+        <!-- 6. Fancy Dress -->
+        <div class="project-tile" data-category="product" onclick="openModal('fancy-dress')">
+          <div class="tile-icon">🎭</div>
+          <img class="tile-img" src="images/fancy-dress/01.jpg" alt=""
+               onerror="this.style.display='none'">
+          <div class="tile-pink-overlay"></div>
+          <div class="tile-label">Fancy Dress</div>
+        </div>
+
+        <!-- 7. Food Lover's Market -->
+        <div class="project-tile" data-category="branding" onclick="openModal('seafood')">
+          <div class="tile-icon">🐟</div>
+          <img class="tile-img" src="images/seafood/01.jpg" alt=""
+               onerror="this.style.display='none'">
+          <div class="tile-pink-overlay"></div>
+          <div class="tile-label">Food Lover's Market</div>
+        </div>
+
+        <!-- 8. Branding -->
+        <div class="project-tile" data-category="branding" onclick="openModal('branding')">
+          <div class="tile-icon">🎨</div>
+          <img class="tile-img" src="images/branding/01.jpg" alt=""
+               onerror="this.style.display='none'">
+          <div class="tile-pink-overlay"></div>
+          <div class="tile-label">Branding</div>
+        </div>
+
+        <!-- 9. Social Media (coming soon) -->
+        <div class="project-tile" data-category="digital" onclick="openModal('social')">
+          <div class="tile-icon">📱</div>
+          <img class="tile-img" src="images/social/01.jpg" alt=""
+               onerror="this.style.display='none'">
+          <div class="tile-pink-overlay"></div>
+          <div class="tile-label">Social Media</div>
+          <div class="tile-soon">Soon</div>
+        </div>
+
+        <!-- 10. Website Layout (coming soon) -->
+        <div class="project-tile" data-category="digital" onclick="openModal('web')">
+          <div class="tile-icon">🌐</div>
+          <img class="tile-img" src="images/web/01.jpg" alt=""
+               onerror="this.style.display='none'">
+          <div class="tile-pink-overlay"></div>
+          <div class="tile-label">Website Layout</div>
+          <div class="tile-soon">Soon</div>
+        </div>
+
+        <!-- 11. Video Editing (coming soon) -->
+        <div class="project-tile" data-category="motion" onclick="openModal('video')">
+          <div class="tile-icon">🎞️</div>
+          <img class="tile-img" src="images/video/01.jpg" alt=""
+               onerror="this.style.display='none'">
+          <div class="tile-pink-overlay"></div>
+          <div class="tile-label">Video Editing</div>
+          <div class="tile-soon">Soon</div>
+        </div>
+
+        <!-- 12. Drawn & Painted (coming soon) -->
+        <div class="project-tile" data-category="motion" onclick="openModal('drawn')">
+          <div class="tile-icon">🖌️</div>
+          <img class="tile-img" src="images/drawn/01.jpg" alt=""
+               onerror="this.style.display='none'">
+          <div class="tile-pink-overlay"></div>
+          <div class="tile-label">Drawn &amp; Painted</div>
+          <div class="tile-soon">Soon</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="work-footer">
+      <button class="btn-pink" onclick="showPage('about')">Get in Touch</button>
+      <button class="btn-lime" onclick="showPage('home')">&uarr; Home</button>
+    </div>
+
+  </section>
+
+
+  <!-- ============================================================
+       ABOUT / CONTACT PAGE
+  ============================================================ -->
+  <section class="page" id="about">
+
+    <header class="site-header">
+      <div class="header-logo" onclick="showPage('home')" title="Home">
+        <img src="images/logo.gif" alt="Lindmill"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="header-logo-text" style="display:none;">LIND<br>MILL</div>
+      </div>
+      <nav class="header-nav">
+        <button class="header-nav-link" onclick="showPage('work')">Work</button>
+        <button class="header-nav-link" onclick="showPage('home')">Home</button>
+      </nav>
+    </header>
+
+    <div class="about-body">
+
+      <!-- Logo badge -->
+      <div class="about-badge">
+        <img src="images/logo.gif" alt="Lindmill Designs"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="about-badge-text" style="display:none;">LINDMILL<br>DESIGNS</div>
+      </div>
+
+      <h2 class="about-hello">HELLO!</h2>
+
+      <p class="about-bio">
+        I'm a digital designer specialising in branding, now expanding into motion design and illustration to bring brands to life through visual storytelling.
+      </p>
+      <p class="about-bio">
+        I've always been drawn to work involving animals, but this past year working reception at a vet, I discovered a new-found enjoyment working with people too.
+      </p>
+
+      <p class="about-contact-line">Feel free to email me — I'd love to chat about your next project.</p>
+      <a class="about-email" href="mailto:thelindamiller@gmail.com">thelindamiller@gmail.com</a>
+
+      <!-- Photo placeholders — replace linda-1.jpg and linda-2.jpg -->
+      <div class="photo-grid">
+        <div class="photo-card">
+          <img src="images/linda-1.jpg" alt="Linda Miller"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="photo-ph" style="display:none;">
+            <span>🐶</span>Linda &amp; dog photo<br>
+            <small>linda-1.jpg</small>
+          </div>
+        </div>
+        <div class="photo-card">
+          <img src="images/linda-2.jpg" alt="Linda outdoors"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="photo-ph" style="display:none;">
+            <span>🌿</span>Linda outdoors photo<br>
+            <small>linda-2.jpg</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Social icons -->
+      <div class="social-bar">
+        <!-- Replace href with Linda's actual social URLs -->
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener" title="Instagram">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+          </svg>
+        </a>
+        <a href="https://www.linkedin.com/" target="_blank" rel="noopener" title="LinkedIn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+            <rect x="2" y="9" width="4" height="12"/>
+            <circle cx="4" cy="4" r="2"/>
+          </svg>
+        </a>
+        <a href="mailto:thelindamiller@gmail.com" title="Email">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+        </a>
+        <a href="https://www.behance.net/" target="_blank" rel="noopener" title="Behance">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 6h7a4 4 0 0 1 0 8H2z"/>
+            <path d="M2 14h9a4 4 0 0 1 0 8H2z"/>
+            <line x1="14" y1="7" x2="22" y2="7"/>
+            <path d="M14 11c0-3.3 2.7-5 5.5-5S25 7.7 25 11"/>
+            <line x1="14" y1="16" x2="22" y2="16"/>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+
+    <div class="about-footer">
+      <button class="btn-lime" onclick="showPage('work')">See My Work</button>
+      <button class="btn-lime" onclick="showPage('home')">&uarr; Home</button>
+    </div>
+
+  </section>
+
+
+  <!-- ============================================================
+       PROJECT MODAL
+  ============================================================ -->
+  <div class="modal-overlay" id="modalOverlay" onclick="modalBgClick(event)">
+    <div class="modal-card" id="modalCard">
+      <button class="modal-close" onclick="closeModal()" title="Close">&times;</button>
+      <h2 class="modal-title"  id="modalTitle"></h2>
+      <p  class="modal-desc"   id="modalDesc"></p>
+      <div class="modal-grid"  id="modalGrid"></div>
+    </div>
+  </div>
+
+  <!-- Single-image lightbox -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+    <img id="lightboxImg" src="" alt="">
+  </div>
+
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+
+    /* ---- PAGE SYSTEM ---- */
+    function showPage(id) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      window.scrollTo(0, 0);
+    }
+
+    /* ---- PROCEDURAL STARS ---- */
+    (function addStars() {
+      const container = document.getElementById('starsContainer');
+      const sparkle = '✦';
+      const stars = [
+        { x:12,  y:8,   size:18, dur:2.8, del:0,    lo:0.2, hi:0.9 },
+        { x:88,  y:5,   size:14, dur:3.4, del:0.6,  lo:0.3, hi:1   },
+        { x:25,  y:22,  size:10, dur:2.2, del:1.1,  lo:0.1, hi:0.7 },
+        { x:70,  y:18,  size:22, dur:3.8, del:0.3,  lo:0.2, hi:1   },
+        { x:45,  y:12,  size:12, dur:2.6, del:1.8,  lo:0.3, hi:0.85},
+        { x:92,  y:28,  size:8,  dur:4.1, del:0.8,  lo:0.15,hi:0.6 },
+        { x:6,   y:35,  size:16, dur:3.0, del:2.1,  lo:0.2, hi:0.9 },
+        { x:58,  y:7,   size:10, dur:2.4, del:1.5,  lo:0.25,hi:0.8 },
+        { x:38,  y:30,  size:6,  dur:3.6, del:0.2,  lo:0.1, hi:0.5 },
+        { x:78,  y:40,  size:14, dur:2.9, del:2.4,  lo:0.2, hi:0.85},
+      ];
+      stars.forEach(s => {
+        const el = document.createElement('div');
+        el.className = 'star';
+        el.textContent = sparkle;
+        el.style.cssText =
+          `left:${s.x}%;top:${s.y}%;font-size:${s.size}px;` +
+          `--dur:${s.dur}s;--del:${s.del}s;--lo:${s.lo};--hi:${s.hi};`;
+        container.appendChild(el);
+      });
+    })();
+
+    /* ---- FILTER PILLS ---- */
+    document.querySelectorAll('.filter-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        const f = pill.dataset.filter;
+        document.querySelectorAll('.project-tile').forEach(tile => {
+          tile.style.display = (f === 'all' || tile.dataset.category === f) ? '' : 'none';
+        });
+      });
+    });
+
+    /* ---- PROJECT DATA ---- */
+    const PROJECTS = {
+      animation: {
+        title: 'Motion & Animation',
+        desc:  'Bringing brands and stories to life through motion design and animation.',
+        folder:'images/animation',
+        count: 8
+      },
+      illustration: {
+        title: 'Illustration',
+        desc:  'Character and editorial illustration across a range of styles and media.',
+        folder:'images/illustration',
+        count: 8
+      },
+      'food-labels': {
+        title: 'Food Labels',
+        desc:  'Product label design for honey, bacon, coffee, tuna, and more.',
+        folder:'images/food-labels',
+        count: 12
+      },
+      'logo-design': {
+        title: 'Logo Design',
+        desc:  'Logo and brand identity design — including the full Isabelo brand suite.',
+        folder:'images/logo-design',
+        count: 17
+      },
+      textile: {
+        title: 'Textile Design',
+        desc:  'Pattern and textile design for print and fabric — featuring Small Dog and other collections.',
+        folder:'images/textile',
+        count: 5
+      },
+      'fancy-dress': {
+        title: 'Fancy Dress',
+        desc:  'Costume design illustrations for the Medium Dog fancy dress collection.',
+        folder:'images/fancy-dress',
+        count: 7
+      },
+      seafood: {
+        title: "Food Lover's Market",
+        desc:  'Branding and packaging design for a seafood and liquor retail brand.',
+        folder:'images/seafood',
+        count: 12
+      },
+      branding: {
+        title: 'Branding',
+        desc:  'Full brand identity and collateral design projects.',
+        folder:'images/branding',
+        count: 8
+      },
+      social: {
+        title: 'Social Media',
+        desc:  'Social media content, templates, and campaign graphics.',
+        folder:'images/social',
+        count: 8
+      },
+      web: {
+        title: 'Website Layout',
+        desc:  'Web and UI design concepts, wireframes, and page layouts.',
+        folder:'images/web',
+        count: 6
+      },
+      video: {
+        title: 'Video Editing',
+        desc:  'Video editing and post-production work.',
+        folder:'images/video',
+        count: 6
+      },
+      drawn: {
+        title: 'Drawn & Painted',
+        desc:  'Traditional and digital drawing and painting.',
+        folder:'images/drawn',
+        count: 8
+      },
+    };
+
+    /* ---- MODAL OPEN ---- */
+    function openModal(key) {
+      const p = PROJECTS[key];
+      if (!p) return;
+
+      document.getElementById('modalTitle').textContent = p.title;
+      document.getElementById('modalDesc').textContent  = p.desc;
+
+      const grid = document.getElementById('modalGrid');
+      grid.innerHTML = '';
+
+      for (let i = 1; i <= p.count; i++) {
+        const num = String(i).padStart(2, '0');
+        const src = `${p.folder}/${num}.jpg`;
+        const item = document.createElement('div');
+        item.className = 'modal-item';
+        item.innerHTML =
+          `<img src="${src}" alt="${p.title} ${num}"
+                loading="lazy"
+                onclick="openLightbox(this.src)"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+           <div class="modal-item-ph" style="display:none;">
+             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+             <span>${num}.jpg</span>
+           </div>`;
+        grid.appendChild(item);
+      }
+
+      document.getElementById('modalOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    /* ---- MODAL CLOSE ---- */
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function modalBgClick(e) {
+      if (e.target === document.getElementById('modalOverlay')) closeModal();
+    }
+
+    /* ---- LIGHTBOX ---- */
+    function openLightbox(src) {
+      document.getElementById('lightboxImg').src = src;
+      document.getElementById('lightbox').classList.add('open');
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+    }
+
+    /* ---- KEYBOARD SHORTCUTS ---- */
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        closeLightbox();
+        closeModal();
+      }
+    });
+
+  </script>
+</body>
+</html>

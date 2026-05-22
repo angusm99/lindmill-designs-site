@@ -1,0 +1,118 @@
+========================================
+  LINDMILL DESIGNS — HOW TO PUBLISH
+  (Netlify drag & drop — free, no coding)
+========================================
+
+STEP 1 — ADD YOUR IMAGES
+--------------------------
+Put images inside the "images" folder — each project has its own subfolder.
+Name them: 01.jpg, 02.jpg, 03.jpg ... (zero-padded, .jpg or .png)
+
+  images/
+  ├── logo.gif          ← animated GIF logo (or logo.png)
+  ├── linda-1.jpg       ← photo 1 (you + dog)
+  ├── linda-2.jpg       ← photo 2 (outdoors)
+  │
+  ├── animation/        ← 01.jpg to 08.jpg  (8 images)
+  ├── illustration/     ← 01.jpg to 08.jpg  (8 images)
+  ├── food-labels/      ← 01.jpg to 12.jpg  (12 images)
+  ├── logo-design/      ← 01.jpg to 17.jpg  (17 images)
+  ├── textile/          ← 01.jpg to 05.jpg  (5 images)
+  ├── fancy-dress/      ← 01.jpg to 07.jpg  (7 images)
+  ├── seafood/          ← 01.jpg to 12.jpg  (Food Lover's Market)
+  ├── branding/         ← 01.jpg to 08.jpg  (8 images)
+  ├── social/           ← 01.jpg to 08.jpg  (coming soon)
+  ├── web/              ← 01.jpg to 06.jpg  (coming soon)
+  ├── video/            ← 01.jpg to 06.jpg  (coming soon)
+  └── drawn/            ← 01.jpg to 08.jpg  (coming soon)
+
+TIP: If you have fewer images than the count shown above, the missing
+     ones just won't appear in the modal — no errors, no broken layout.
+TIP: To change the image count for a project, open index.html and find
+     the matching entry in the PROJECTS object (e.g. 'food-labels')
+     and change the "count" number.
+
+
+STEP 2 — UPDATE YOUR SOCIAL LINKS
+-----------------------------------
+Open index.html in any text editor.
+Search for these placeholder URLs and replace with Linda's real profiles:
+  href="https://www.instagram.com/"
+  href="https://www.linkedin.com/"
+  href="https://www.behance.net/"
+
+
+STEP 3 — TEST LOCALLY
+-----------------------
+Open index.html directly in Chrome or Edge (double-click it).
+The page works as a local file — no server needed for basic testing.
+
+
+STEP 4 — PUBLISH ON NETLIFY (FREE)
+------------------------------------
+1. Go to https://netlify.com
+2. Sign up free (use your email)
+3. On the dashboard, find the drag-and-drop deploy area
+4. Drag the entire "lindmilldesigns-site" folder onto it
+5. Done! You get a free URL like https://something-random.netlify.app
+
+STEP 5 — CUSTOM DOMAIN (optional, ~R200/year)
+-----------------------------------------------
+- Buy a domain at Namecheap.com (e.g. lindmilldesigns.com)
+- In Netlify → Site settings → Domain management → Add custom domain
+- Follow Netlify's instructions — straightforward, takes ~10 minutes
+
+
+========================================
+  QUICK CONTENT EDITS (in index.html)
+========================================
+
+CHANGE THE BIO TEXT:
+  Search for: "I'm a digital designer specialising in branding"
+  Edit the two <p class="about-bio"> paragraphs in the about section.
+
+CHANGE THE EMAIL:
+  Search for: thelindamiller@gmail.com
+  Replace all instances with the correct address.
+
+ADD/REMOVE A PROJECT TILE:
+  In the "project-grid" div, each tile is a <div class="project-tile">.
+  Copy an existing tile block and update the onclick, folder name, and label.
+  Also add a matching entry in the PROJECTS object in the <script> section.
+
+REMOVE "SOON" BADGE FROM A TILE:
+  Delete the <div class="tile-soon">Soon</div> line from that tile.
+
+CHANGE COLOURS:
+  At the top of the <style> block, edit the :root CSS variables:
+    --navy:  #06102e   (dark background)
+    --lime:  #c7ff3e   (green-yellow accent)
+    --pink:  #ff3d96   (hot pink)
+
+
+========================================
+  FOLDER STRUCTURE (don't rename these)
+========================================
+
+lindmilldesigns-site/
+├── index.html
+├── HOW-TO-PUBLISH.txt
+├── .claude/              ← Claude Code config (can ignore)
+└── images/
+    ├── logo.gif
+    ├── linda-1.jpg
+    ├── linda-2.jpg
+    ├── animation/
+    ├── illustration/
+    ├── food-labels/
+    ├── logo-design/
+    ├── textile/
+    ├── fancy-dress/
+    ├── seafood/
+    ├── branding/
+    ├── social/
+    ├── web/
+    ├── video/
+    └── drawn/
+
+========================================
