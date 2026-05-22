@@ -1272,15 +1272,11 @@
         grid.innerHTML = '';
 
         if (found.length === 0) {
-          // Empty folder — show thumbnail hero + coming-soon message
+          // No gallery images — show thumbnail as the single featured image
           grid.classList.add('single-hero');
           grid.innerHTML =
             `<div class="modal-hero">
                <img src="${p.thumb}" alt="${p.title}" onclick="openLightbox(this.src)">
-             </div>
-             <div class="modal-coming-soon">
-               <strong>Full gallery coming soon</strong>
-               <span>Linda is adding more ${p.title.toLowerCase()} work here — check back!</span>
              </div>`;
         } else {
           grid.classList.remove('single-hero');
