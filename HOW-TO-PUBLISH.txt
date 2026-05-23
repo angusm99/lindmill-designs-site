@@ -1,42 +1,44 @@
 ========================================
   LINDMILL DESIGNS — HOW TO PUBLISH
   (Netlify drag & drop — free, no coding)
+  Updated: May 2026
 ========================================
 
-STEP 1 — ADD YOUR IMAGES
---------------------------
+STEP 1 — ADD OR SWAP IMAGES
+-----------------------------
 Put images inside the "images" folder — each project has its own subfolder.
-Name them: 01.jpg, 02.jpg, 03.jpg ... (zero-padded, .jpg or .png)
+Name them: 01.jpg, 02.jpg, 03.jpg, … (zero-padded, .jpg or .png or .gif)
+The site auto-discovers files up to 50 per folder — just add files and redeploy.
 
   images/
-  ├── logo.gif          ← animated GIF logo (or logo.png)
-  ├── linda-1.jpg       ← photo 1 (you + dog)
-  ├── linda-2.jpg       ← photo 2 (outdoors)
+  ├── logo.gif              ← animated GIF logo badge (header + about page)
+  ├── linda-1.jpg           ← about-page photo (you + Zula)
+  ├── linda-2.jpg           ← about-page photo (outdoors)
   │
-  ├── animation/        ← 01.jpg to 08.jpg  (8 images)
-  ├── illustration/     ← 01.jpg to 08.jpg  (8 images)
-  ├── food-labels/      ← 01.jpg to 12.jpg  (12 images)
-  ├── logo-design/      ← 01.jpg to 17.jpg  (17 images)
-  ├── textile/          ← 01.jpg to 05.jpg  (5 images)
-  ├── fancy-dress/      ← 01.jpg to 07.jpg  (7 images)
-  ├── seafood/          ← 01.jpg to 12.jpg  (Food Lover's Market)
-  ├── branding/         ← 01.jpg to 08.jpg  (8 images)
-  ├── social/           ← 01.jpg to 08.jpg  (coming soon)
-  ├── web/              ← 01.jpg to 06.jpg  (coming soon)
-  ├── video/            ← 01.jpg to 06.jpg  (coming soon)
-  └── drawn/            ← 01.jpg to 08.jpg  (coming soon)
+  ├── thumbnails/           ← one thumbnail per project tile (01–12)
+  │     01.gif → 12.jpg
+  │
+  ├── animated/             ← 38 images  (Motion + Illustration)
+  ├── drawn/                ← 4 images   (Motion + Illustration)
+  ├── illustrated/          ← 22 images  (Motion + Illustration)
+  ├── painted/              ← 4 images   (Motion + Illustration)
+  ├── video-editing/        ← 7 images   (Digital)
+  ├── website-layout/       ← 4 images   (Digital)
+  ├── social-media/         ← 36 images  (Digital)
+  ├── content-writing/      ← 16 images  (Digital)
+  ├── food-labels/          ← 19 images  (Branding)
+  ├── logo-design/          ← 17 images  (Branding)
+  ├── textile-design/       ← 18 images  (Branding)
+  └── layout/               ← 16 images  (Branding)
 
-TIP: If you have fewer images than the count shown above, the missing
-     ones just won't appear in the modal — no errors, no broken layout.
-TIP: To change the image count for a project, open index.html and find
-     the matching entry in the PROJECTS object (e.g. 'food-labels')
-     and change the "count" number.
+TIP: To add images just drop numbered files into any folder and redeploy.
+TIP: To replace a thumbnail, overwrite the matching file in thumbnails/
 
 
 STEP 2 — UPDATE YOUR SOCIAL LINKS
 -----------------------------------
-Open index.html in any text editor.
-Search for these placeholder URLs and replace with Linda's real profiles:
+Open index.html in any text editor (Notepad, VS Code, etc.).
+Search for these placeholder URLs and replace with your real profiles:
   href="https://www.instagram.com/"
   href="https://www.linkedin.com/"
   href="https://www.behance.net/"
@@ -45,22 +47,34 @@ Search for these placeholder URLs and replace with Linda's real profiles:
 STEP 3 — TEST LOCALLY
 -----------------------
 Open index.html directly in Chrome or Edge (double-click it).
-The page works as a local file — no server needed for basic testing.
+The site works as a plain local file for basic testing.
+Gallery images may not load on file:// — use a local server for full testing
+(VS Code → right-click index.html → Open with Live Server).
 
 
-STEP 4 — PUBLISH ON NETLIFY (FREE)
-------------------------------------
-1. Go to https://netlify.com
-2. Sign up free (use your email)
-3. On the dashboard, find the drag-and-drop deploy area
-4. Drag the entire "lindmilldesigns-site" folder onto it
-5. Done! You get a free URL like https://something-random.netlify.app
+STEP 4 — PUBLISH ON NETLIFY (FREE, easiest)
+--------------------------------------------
+1. Go to https://netlify.com and sign up free (use your email)
+2. On your dashboard, click "Add new site" → "Deploy manually"
+3. Drag the entire "lindmilldesigns-site" folder onto the drop zone
+4. Done! You get a free URL like https://something-random.netlify.app
+5. To update later: drag the folder again — Netlify keeps the same URL
 
-STEP 5 — CUSTOM DOMAIN (optional, ~R200/year)
------------------------------------------------
-- Buy a domain at Namecheap.com (e.g. lindmilldesigns.com)
-- In Netlify → Site settings → Domain management → Add custom domain
-- Follow Netlify's instructions — straightforward, takes ~10 minutes
+STEP 5 — AUTO-DEPLOY FROM GITHUB (set-and-forget)
+---------------------------------------------------
+Once you want changes to go live automatically:
+1. In Netlify → your site → "Site configuration" → "Build & deploy"
+2. Connect to GitHub → choose repo: angusm99/lindmill-designs-site
+3. Build command: (leave blank)  Publish directory: /  (root)
+4. Every git push to main will now auto-deploy within ~30 seconds
+
+
+STEP 6 — CUSTOM DOMAIN (optional, ~R200–R350/year)
+----------------------------------------------------
+- Buy a domain at Namecheap.com or domains.co.za (e.g. lindmilldesigns.com)
+- In Netlify → Site configuration → Domain management → Add custom domain
+- Netlify guides you through pointing DNS — takes ~10 minutes + up to 1 hour
+  for DNS to propagate
 
 
 ========================================
@@ -69,50 +83,65 @@ STEP 5 — CUSTOM DOMAIN (optional, ~R200/year)
 
 CHANGE THE BIO TEXT:
   Search for: "I'm a digital designer specialising in branding"
-  Edit the two <p class="about-bio"> paragraphs in the about section.
+  Edit the two <p class="about-bio"> paragraphs in the About section.
 
-CHANGE THE EMAIL:
+CHANGE THE EMAIL ADDRESS:
   Search for: thelindamiller@gmail.com
-  Replace all instances with the correct address.
-
-ADD/REMOVE A PROJECT TILE:
-  In the "project-grid" div, each tile is a <div class="project-tile">.
-  Copy an existing tile block and update the onclick, folder name, and label.
-  Also add a matching entry in the PROJECTS object in the <script> section.
-
-REMOVE "SOON" BADGE FROM A TILE:
-  Delete the <div class="tile-soon">Soon</div> line from that tile.
+  Replace all instances (3 places) with the correct address.
 
 CHANGE COLOURS:
-  At the top of the <style> block, edit the :root CSS variables:
-    --navy:  #06102e   (dark background)
-    --lime:  #c7ff3e   (green-yellow accent)
-    --pink:  #ff3d96   (hot pink)
+  At the top of the <style> block, edit the CSS variables:
+    --navy:  #06102e   (dark navy background)
+    --lime:  #c7ff3e   (lime-green accent / wordmark)
+    --pink:  #ff3d96   (hot pink / CTA)
+
+ADD AN IMAGE TO A GALLERY:
+  Drop a new file into the matching images/ subfolder, numbered next in sequence.
+  E.g. if logo-design/ has 01–17.jpg, add 18.jpg and redeploy.
+
+REPLACE A GALLERY THUMBNAIL:
+  Overwrite the matching file in images/thumbnails/ (01.gif–12.jpg).
 
 
 ========================================
-  FOLDER STRUCTURE (don't rename these)
+  FOLDER STRUCTURE (keep these names)
 ========================================
 
 lindmilldesigns-site/
-├── index.html
-├── HOW-TO-PUBLISH.txt
-├── .claude/              ← Claude Code config (can ignore)
+├── index.html              ← entire site: markup, styles, JavaScript
+├── HOW-TO-PUBLISH.txt      ← this file
+├── README.md               ← developer notes
+├── DESIGN_BRIEF.md         ← design spec / AI handoff doc
+├── robots.txt
+├── sitemap.xml
+├── .gitignore
+├── videos/
+│   └── hero.mp4            ← home page hero video (6.6 MB)
 └── images/
     ├── logo.gif
     ├── linda-1.jpg
     ├── linda-2.jpg
-    ├── animation/
-    ├── illustration/
+    ├── thumbnails/          ← 01.gif – 12.jpg (one per work tile)
+    ├── animated/
+    ├── drawn/
+    ├── illustrated/
+    ├── painted/
+    ├── video-editing/
+    ├── website-layout/
+    ├── social-media/
+    ├── content-writing/
     ├── food-labels/
     ├── logo-design/
-    ├── textile/
-    ├── fancy-dress/
-    ├── seafood/
-    ├── branding/
-    ├── social/
-    ├── web/
-    ├── video/
-    └── drawn/
+    ├── textile-design/
+    └── layout/
+
+========================================
+  LIGHTBOX / GALLERY TIPS
+========================================
+
+- Click any project tile to open its gallery
+- Click any image in the gallery to zoom it full-screen
+- Use ← → arrow keys (or swipe left/right on mobile) to navigate images
+- Press Escape (or tap the × button) to close
 
 ========================================

@@ -5,6 +5,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lindmill Designs — Motion Design & Illustration</title>
   <meta name="description" content="Linda Miller — brand-focused motion designer and illustrator specialising in branding, motion design, and visual storytelling.">
+
+  <!-- SEO metadata -->
+  <meta name="author" content="Linda Miller — Lindmill Designs">
+  <meta name="keywords" content="motion design, illustration, branding, logo design, textile design, food label design, visual storytelling, Linda Miller, Lindmill Designs, portfolio">
+  <meta name="theme-color" content="#06102e">
+  <link rel="canonical" href="https://lindmilldesigns.com/">
+
+  <!-- Open Graph — Facebook, LinkedIn, WhatsApp, Discord link previews -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lindmilldesigns.com/">
+  <meta property="og:title" content="Lindmill Designs — Motion Design & Illustration">
+  <meta property="og:description" content="Linda Miller — brand-focused motion designer and illustrator specialising in branding, motion design, and visual storytelling.">
+  <meta property="og:image" content="https://lindmilldesigns.com/images/thumbnails/03.jpg">
+  <meta property="og:image:width" content="1000">
+  <meta property="og:image:height" content="1000">
+  <meta property="og:image:alt" content="Lindmill Designs — illustrated portfolio work by Linda Miller">
+  <meta property="og:site_name" content="Lindmill Designs">
+  <meta property="og:locale" content="en_ZA">
+
+  <!-- Twitter card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lindmill Designs — Motion Design & Illustration">
+  <meta name="twitter:description" content="Linda Miller — brand-focused motion designer and illustrator.">
+  <meta name="twitter:image" content="https://lindmilldesigns.com/images/thumbnails/03.jpg">
+  <meta name="twitter:image:alt" content="Lindmill Designs — illustrated portfolio work by Linda Miller">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/gif" href="images/logo.gif">
+  <link rel="shortcut icon" type="image/gif" href="images/logo.gif">
+  <link rel="apple-touch-icon" href="images/logo.gif">
+
+  <!-- Structured data — Schema.org Person -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Linda Miller",
+    "alternateName": "Lindmill Designs",
+    "url": "https://lindmilldesigns.com",
+    "email": "thelindamiller@gmail.com",
+    "jobTitle": "Motion Designer and Illustrator",
+    "description": "Brand-focused motion designer and illustrator specialising in branding, motion design, and visual storytelling.",
+    "image": "https://lindmilldesigns.com/images/linda-1.jpg",
+    "knowsAbout": ["Motion Design", "Illustration", "Branding", "Logo Design", "Textile Design", "Food Label Design", "Visual Storytelling"]
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Nunito:wght@400;600;800;900&display=swap" rel="stylesheet">
@@ -25,6 +72,33 @@
       --white: #ffffff;
       --fish:  #0a1540;
     }
+
+    /* Accessibility: visible focus ring only for keyboard users */
+    :focus { outline: none; }
+    body.using-keyboard *:focus-visible {
+      outline: 3px solid var(--pink);
+      outline-offset: 3px;
+      border-radius: 3px;
+    }
+    body.using-keyboard .project-tile:focus-visible {
+      outline-offset: 4px;
+    }
+
+    /* Skip-to-content link (visible only when focused) */
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 0;
+      background: var(--lime);
+      color: var(--navy);
+      padding: 0.6rem 1rem;
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 700;
+      text-decoration: none;
+      z-index: 9999;
+      border-radius: 0 0 4px 0;
+    }
+    .skip-link:focus { top: 0; }
 
     html { font-size: 16px; }
 
@@ -781,6 +855,54 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      z-index: 2;
+    }
+    /* Lightbox prev / next arrows */
+    .lightbox-prev, .lightbox-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      background: rgba(255,61,150,0.75);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      font-size: 2.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      line-height: 1;
+      transition: background 0.18s;
+    }
+    .lightbox-prev:hover, .lightbox-next:hover { background: var(--pink); }
+    .lightbox-prev { left: 1rem; }
+    .lightbox-next { right: 1rem; }
+    /* Image counter */
+    .lightbox-counter {
+      position: absolute;
+      bottom: 1.2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.88);
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1rem;
+      background: rgba(0,0,0,0.5);
+      padding: 3px 14px;
+      border-radius: 20px;
+      pointer-events: none;
+      white-space: nowrap;
+      z-index: 2;
+    }
+    /* Hide nav when only one image */
+    .lightbox.single-image .lightbox-prev,
+    .lightbox.single-image .lightbox-next,
+    .lightbox.single-image .lightbox-counter { display: none; }
+    @media (max-width: 500px) {
+      .lightbox-prev { left: 0.35rem; }
+      .lightbox-next { right: 0.35rem; }
     }
 
     /* ================================================
@@ -804,6 +926,8 @@
   </style>
 </head>
 <body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
   <!-- ============================================================
        HOME PAGE
@@ -928,7 +1052,8 @@
   <!-- ============================================================
        WORK PAGE
   ============================================================ -->
-  <section class="page" id="work">
+  <section class="page" id="work" aria-label="Portfolio">
+    <a id="main-content"></a>
 
     <header class="site-header">
       <div class="header-logo" onclick="showPage('home')" title="Home">
@@ -961,84 +1086,84 @@
 
         <!-- 1. ANIMATED -->
         <div class="project-tile" data-category="motion-illustration" onclick="openModal('animated')">
-          <img class="tile-img" src="images/thumbnails/01.gif" alt="Animated">
+          <img class="tile-img" loading="lazy" decoding="async" src="images/thumbnails/01.gif" alt="Animated">
           <div class="tile-pink-overlay"></div>
           <div class="tile-label">Animated</div>
         </div>
 
         <!-- 2. DRAWN -->
         <div class="project-tile" data-category="motion-illustration" onclick="openModal('drawn')">
-          <img class="tile-img" src="images/thumbnails/02.jpg" alt="Drawn">
+          <img class="tile-img" loading="lazy" decoding="async" src="images/thumbnails/02.jpg" alt="Drawn">
           <div class="tile-pink-overlay"></div>
           <div class="tile-label">Drawn</div>
         </div>
 
         <!-- 3. ILLUSTRATED -->
         <div class="project-tile" data-category="motion-illustration" onclick="openModal('illustrated')">
-          <img class="tile-img" src="images/thumbnails/03.jpg" alt="Illustrated">
+          <img class="tile-img" loading="lazy" decoding="async" src="images/thumbnails/03.jpg" alt="Illustrated">
           <div class="tile-pink-overlay"></div>
           <div class="tile-label">Illustrated</div>
         </div>
 
         <!-- 4. PAINTED -->
         <div class="project-tile" data-category="motion-illustration" onclick="openModal('painted')">
-          <img class="tile-img" src="images/thumbnails/04.jpg" alt="Painted">
+          <img class="tile-img" loading="lazy" decoding="async" src="images/thumbnails/04.jpg" alt="Painted">
           <div class="tile-pink-overlay"></div>
           <div class="tile-label">Painted</div>
         </div>
 
         <!-- 5. VIDEO EDITING -->
         <div class="project-tile" data-category="digital" onclick="openModal('video-editing')">
-          <img class="tile-img" src="images/thumbnails/05.jpg" alt="Video Editing">
+          <img class="tile-img" loading="lazy" decoding="async" src="images/thumbnails/05.jpg" alt="Video Editing">
           <div class="tile-pink-overlay"></div>
           <div class="tile-label">Video Editing</div>
         </div>
 
         <!-- 6. WEBSITE LAYOUT -->
         <div class="project-tile" data-category="digital" onclick="openModal('website-layout')">
-          <img class="tile-img" src="images/thumbnails/06.jpg" alt="Website Layout">
+          <img class="tile-img" loading="lazy" decoding="async" src="images/thumbnails/06.jpg" alt="Website Layout">
           <div class="tile-pink-overlay"></div>
           <div class="tile-label">Website Layout</div>
         </div>
 
         <!-- 7. SOCIAL MEDIA -->
         <div class="project-tile" data-category="digital" onclick="openModal('social-media')">
-          <img class="tile-img" src="images/thumbnails/07.jpg" alt="Social Media">
+          <img class="tile-img" loading="lazy" decoding="async" src="images/thumbnails/07.jpg" alt="Social Media">
           <div class="tile-pink-overlay"></div>
           <div class="tile-label">Social Media</div>
         </div>
 
         <!-- 8. CONTENT WRITING -->
         <div class="project-tile" data-category="digital" onclick="openModal('content-writing')">
-          <img class="tile-img" src="images/thumbnails/08.jpg" alt="Content Writing">
+          <img class="tile-img" loading="lazy" decoding="async" src="images/thumbnails/08.jpg" alt="Content Writing">
           <div class="tile-pink-overlay"></div>
           <div class="tile-label">Content Writing</div>
         </div>
 
         <!-- 9. FOOD LABEL DESIGN -->
         <div class="project-tile" data-category="branding" onclick="openModal('food-labels')">
-          <img class="tile-img" src="images/thumbnails/09.jpg" alt="Food Label Design">
+          <img class="tile-img" loading="lazy" decoding="async" src="images/thumbnails/09.jpg" alt="Food Label Design">
           <div class="tile-pink-overlay"></div>
           <div class="tile-label">Food Label Design</div>
         </div>
 
         <!-- 10. LOGO DESIGN -->
         <div class="project-tile" data-category="branding" onclick="openModal('logo-design')">
-          <img class="tile-img" src="images/thumbnails/10.jpg" alt="Logo Design">
+          <img class="tile-img" loading="lazy" decoding="async" src="images/thumbnails/10.jpg" alt="Logo Design">
           <div class="tile-pink-overlay"></div>
           <div class="tile-label">Logo Design</div>
         </div>
 
         <!-- 11. TEXTILE DESIGN -->
         <div class="project-tile" data-category="branding" onclick="openModal('textile-design')">
-          <img class="tile-img" src="images/thumbnails/11.jpg" alt="Textile Design">
+          <img class="tile-img" loading="lazy" decoding="async" src="images/thumbnails/11.jpg" alt="Textile Design">
           <div class="tile-pink-overlay"></div>
           <div class="tile-label">Textile Design</div>
         </div>
 
         <!-- 12. LAYOUT -->
         <div class="project-tile" data-category="branding" onclick="openModal('layout')">
-          <img class="tile-img" src="images/thumbnails/12.jpg" alt="Layout">
+          <img class="tile-img" loading="lazy" decoding="async" src="images/thumbnails/12.jpg" alt="Layout">
           <div class="tile-pink-overlay"></div>
           <div class="tile-label">Layout + Signage</div>
         </div>
@@ -1095,7 +1220,7 @@
       <!-- Photo placeholders — replace linda-1.jpg and linda-2.jpg -->
       <div class="photo-grid">
         <div class="photo-card">
-          <img src="images/linda-1.jpg" alt="Linda Miller"
+          <img src="images/linda-1.jpg" alt="Linda Miller" loading="lazy" decoding="async"
                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
           <div class="photo-ph" style="display:none;">
             <span>🐶</span>Linda &amp; dog photo<br>
@@ -1103,7 +1228,7 @@
           </div>
         </div>
         <div class="photo-card">
-          <img src="images/linda-2.jpg" alt="Linda outdoors"
+          <img src="images/linda-2.jpg" alt="Linda outdoors" loading="lazy" decoding="async"
                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
           <div class="photo-ph" style="display:none;">
             <span>🌿</span>Linda outdoors photo<br>
@@ -1159,19 +1284,22 @@
   <!-- ============================================================
        PROJECT MODAL
   ============================================================ -->
-  <div class="modal-overlay" id="modalOverlay" onclick="modalBgClick(event)">
+  <div class="modal-overlay" id="modalOverlay" onclick="modalBgClick(event)" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
     <div class="modal-card" id="modalCard">
-      <button class="modal-close" onclick="closeModal()" title="Close">&times;</button>
+      <button class="modal-close" onclick="closeModal()" aria-label="Close gallery">&times;</button>
       <h2 class="modal-title"  id="modalTitle"></h2>
       <p  class="modal-desc"   id="modalDesc"></p>
       <div class="modal-grid"  id="modalGrid"></div>
     </div>
   </div>
 
-  <!-- Single-image lightbox -->
-  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
-    <img id="lightboxImg" src="" alt="">
+  <!-- Single-image lightbox with prev/next navigation -->
+  <div class="lightbox" id="lightbox" onclick="lightboxBgClick(event)" role="dialog" aria-modal="true" aria-label="Fullscreen image viewer" aria-hidden="true">
+    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close fullscreen image">&times;</button>
+    <button class="lightbox-prev"  onclick="stepLightbox(-1)"  aria-label="Previous image">&#8249;</button>
+    <button class="lightbox-next"  onclick="stepLightbox(1)"   aria-label="Next image">&#8250;</button>
+    <img id="lightboxImg" src="" alt="" style="pointer-events:none;">
+    <div class="lightbox-counter" id="lightboxCounter" aria-live="polite"></div>
   </div>
 
 
@@ -1256,8 +1384,12 @@
       const grid = document.getElementById('modalGrid');
       grid.innerHTML = '<div class="modal-loading">Loading gallery…</div>';
 
-      document.getElementById('modalOverlay').classList.add('open');
+      const overlay = document.getElementById('modalOverlay');
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
+      // Move focus to close button after a tick so screen readers announce the dialog
+      setTimeout(() => overlay.querySelector('.modal-close')?.focus(), 50);
 
       // Probe candidate images (try .jpg, .png, .gif at each index)
       const exts = ['jpg','png','gif','jpeg'];
@@ -1274,17 +1406,28 @@
         if (found.length === 0) {
           // No gallery images — show thumbnail as the single featured image
           grid.classList.add('single-hero');
-          grid.innerHTML =
-            `<div class="modal-hero">
-               <img src="${p.thumb}" alt="${p.title}" onclick="openLightbox(this.src)">
-             </div>`;
+          const heroDiv = document.createElement('div');
+          heroDiv.className = 'modal-hero';
+          const heroImg = document.createElement('img');
+          heroImg.src = p.thumb;
+          heroImg.alt = p.title;
+          heroImg.style.cursor = 'zoom-in';
+          heroImg.addEventListener('click', () => openLightbox([p.thumb], 0));
+          heroDiv.appendChild(heroImg);
+          grid.appendChild(heroDiv);
         } else {
           grid.classList.remove('single-hero');
-          found.forEach(src => {
+          found.forEach((src, idx) => {
             const item = document.createElement('div');
             item.className = 'modal-item';
-            item.innerHTML =
-              `<img src="${src}" alt="${p.title}" loading="lazy" onclick="openLightbox(this.src)">`;
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = p.title;
+            img.loading = 'lazy';
+            img.decoding = 'async';
+            img.style.cursor = 'zoom-in';
+            img.addEventListener('click', () => openLightbox(found, idx));
+            item.appendChild(img);
             grid.appendChild(item);
           });
         }
@@ -1308,29 +1451,109 @@
     }
 
     /* ---- MODAL CLOSE ---- */
+    let _modalTrigger = null;
     function closeModal() {
-      document.getElementById('modalOverlay').classList.remove('open');
+      const m = document.getElementById('modalOverlay');
+      m.classList.remove('open');
+      m.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
+      if (_modalTrigger) { try { _modalTrigger.focus(); } catch(_){} _modalTrigger = null; }
     }
     function modalBgClick(e) {
       if (e.target === document.getElementById('modalOverlay')) closeModal();
     }
 
-    /* ---- LIGHTBOX ---- */
-    function openLightbox(src) {
+    /* ---- LIGHTBOX (with prev/next navigation) ---- */
+    let _galleryImages = [];  // current set of gallery image URLs
+    let _lightboxIndex = 0;   // which image is showing
+
+    function openLightbox(images, idx) {
+      _galleryImages = images || [];
+      _lightboxIndex = Math.max(0, Math.min(idx || 0, _galleryImages.length - 1));
+      const lb = document.getElementById('lightbox');
+      lb.classList.add('open');
+      lb.setAttribute('aria-hidden', 'false');
+      if (_galleryImages.length <= 1) lb.classList.add('single-image');
+      else lb.classList.remove('single-image');
+      _renderLightboxFrame();
+    }
+
+    function _renderLightboxFrame() {
+      const src = _galleryImages[_lightboxIndex] || '';
       document.getElementById('lightboxImg').src = src;
-      document.getElementById('lightbox').classList.add('open');
+      document.getElementById('lightboxCounter').textContent =
+        `${_lightboxIndex + 1} / ${_galleryImages.length}`;
     }
+
+    function stepLightbox(dir) {
+      if (_galleryImages.length < 2) return;
+      _lightboxIndex = (_lightboxIndex + dir + _galleryImages.length) % _galleryImages.length;
+      _renderLightboxFrame();
+    }
+
     function closeLightbox() {
-      document.getElementById('lightbox').classList.remove('open');
+      const lb = document.getElementById('lightbox');
+      lb.classList.remove('open');
+      lb.setAttribute('aria-hidden', 'true');
     }
+
+    function lightboxBgClick(e) {
+      // Close only when clicking the backdrop itself, not buttons or image
+      if (e.target.id === 'lightbox') closeLightbox();
+    }
+
+    // Touch swipe left/right to navigate
+    (function () {
+      let _swX = 0;
+      const lb = document.getElementById('lightbox');
+      lb.addEventListener('touchstart', e => { _swX = e.changedTouches[0].clientX; }, { passive: true });
+      lb.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - _swX;
+        if (Math.abs(dx) > 50) stepLightbox(dx < 0 ? 1 : -1);
+      }, { passive: true });
+    })();
 
     /* ---- KEYBOARD SHORTCUTS ---- */
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') {
-        closeLightbox();
+      const lb = document.getElementById('lightbox');
+      const mo = document.getElementById('modalOverlay');
+      if (lb.classList.contains('open')) {
+        if (e.key === 'Escape')     { closeLightbox(); return; }
+        if (e.key === 'ArrowLeft')  { e.preventDefault(); stepLightbox(-1); return; }
+        if (e.key === 'ArrowRight') { e.preventDefault(); stepLightbox(1);  return; }
+      } else if (mo.classList.contains('open') && e.key === 'Escape') {
         closeModal();
       }
+    });
+
+    /* ---- Track modal trigger so focus returns on close ---- */
+    document.addEventListener('click', e => {
+      const tile = e.target.closest('.project-tile');
+      if (tile) _modalTrigger = tile;
+    }, true);
+
+    /* ---- Make project tiles keyboard-accessible (role=button, Enter/Space) ---- */
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.project-tile').forEach(t => {
+        t.setAttribute('role', 'button');
+        t.setAttribute('tabindex', '0');
+        const label = t.querySelector('.tile-label')?.textContent.trim();
+        if (label) t.setAttribute('aria-label', `Open ${label} gallery`);
+        t.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            t.click();
+          }
+        });
+      });
+
+      // Add focus ring style helper class on keyboard nav (so mouse users don't see it)
+      document.body.addEventListener('keydown', e => {
+        if (e.key === 'Tab') document.body.classList.add('using-keyboard');
+      });
+      document.body.addEventListener('mousedown', () => {
+        document.body.classList.remove('using-keyboard');
+      });
     });
 
   </script>
