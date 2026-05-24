@@ -952,8 +952,8 @@
       color: #d9ff76;
       letter-spacing: 0.03em;
     }
-    /* Work heading is on white bg — override to navy */
-    .work-heading { color: var(--navy); }
+    /* Work heading — pink per Linda Update 2 */
+    .work-heading { color: #fe2786; }
     /* Modal title is on dark bg — keep lime */
     .modal-title  { color: #d9ff76; }
     /* About hello — already lime, keep */
@@ -974,7 +974,7 @@
        HERO LOGO (Task 1)
     ================================================ */
     .hero-logo {
-      max-width: 600px;
+      max-width: 1200px;
       width: 90%;
       height: auto;
       display: block;
@@ -1048,7 +1048,7 @@
       right: 22px;
       background: transparent;
       border: none;
-      color: var(--lime);
+      color: #fe2786;
       font-size: 2rem;
       line-height: 1;
       cursor: pointer;
@@ -1179,6 +1179,104 @@
       .modal-text-section { padding: 3.5rem 1.2rem 1rem; }
       .gallery-scroll { padding: 0 1rem; gap: 8px; }
       .gallery-scroll img { max-width: 90vw; }
+    }
+
+    /* ================================================
+       UPDATE 2 OVERRIDES — appended last so they win
+    ================================================ */
+    /* Hide background stars (Update 2 — stars are in the video) */
+    .home-stars { display: none !important; }
+
+    /* Remove pink tint from project thumbnails (Update 2) */
+    .tile-pink-overlay { display: none !important; }
+
+    /* HELLO heading on contact page → pink (Update 2) */
+    .about-hello { color: #fe2786 !important; }
+
+    /* Extra breathing room between footer button and social icons (Update 2) */
+    .work-footer-socials { margin-top: 28px; }
+
+    /* Contact page → white background with dark text (Update 2) */
+    #about { background: #ffffff !important; }
+    #about .about-bio,
+    #about .about-contact-line { color: #143465 !important; }
+    #about .social-bar { border-top-color: rgba(6,16,46,0.12) !important; }
+    #about .social-bar a { color: rgba(6,16,46,0.4) !important; }
+    #about .about-footer { border-top-color: rgba(6,16,46,0.1) !important; }
+
+    /* Resume page styling (Update 2) */
+    #resume { background: #ffffff; }
+    .resume-body {
+      flex: 1;
+      padding: 3rem 2rem 4rem;
+      max-width: 800px;
+      margin: 0 auto;
+      width: 100%;
+      color: #143465;
+    }
+    .resume-heading {
+      font-family: 'Narnia', 'Fredoka', sans-serif;
+      font-size: clamp(2.4rem, 8vw, 4.5rem);
+      color: #fe2786;
+      letter-spacing: 0.03em;
+      margin-bottom: 0.4rem;
+      line-height: 0.95;
+    }
+    .resume-sub {
+      font-family: 'BarlowEB', 'Fredoka', sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 2rem;
+    }
+    .resume-section-title {
+      font-family: 'BarlowEB', 'Fredoka', sans-serif;
+      font-weight: 800;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #fe2786;
+      border-bottom: 2px solid #fe2786;
+      padding-bottom: 0.3rem;
+      margin: 2rem 0 0.8rem;
+    }
+    .resume-item { margin-bottom: 1.2rem; }
+    .resume-item-title {
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--navy);
+      margin-bottom: 0.1rem;
+    }
+    .resume-item-meta {
+      font-size: 0.82rem;
+      color: rgba(6,16,46,0.55);
+      margin-bottom: 0.25rem;
+    }
+    .resume-item p {
+      font-size: 0.92rem;
+      line-height: 1.65;
+      color: #143465;
+    }
+    .resume-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .resume-skill-tag {
+      background: rgba(254,39,134,0.1);
+      color: #fe2786;
+      border: 1px solid rgba(254,39,134,0.3);
+      font-family: 'BarlowEB', 'Fredoka', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 100px;
     }
 
   </style>
@@ -1323,7 +1421,7 @@
     <header class="site-header">
       <!-- Header logo — clickable, Work page only (Task 2) -->
       <a class="header-logo" onclick="showPage('home')" title="Go to Home" href="javascript:void(0)" aria-label="Home">
-        <img src="images/logo.gif" alt="Lindmill Designs"
+        <img src="images/updated-logo.gif" alt="Lindmill Designs"
              onerror="this.style.display='none';">
       </a>
       <nav class="header-nav">
@@ -1456,11 +1554,6 @@
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
           </svg>
         </a>
-        <a href="https://www.behance.net/" target="_blank" rel="noopener" title="Behance" aria-label="Behance">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M2 6h7a4 4 0 0 1 0 8H2z"/><path d="M2 14h9a4 4 0 0 1 0 8H2z"/><line x1="14" y1="7" x2="22" y2="7"/><path d="M14 11c0-3.3 2.7-5 5.5-5S25 7.7 25 11"/><line x1="14" y1="16" x2="22" y2="16"/>
-          </svg>
-        </a>
       </div>
     </div>
 
@@ -1475,7 +1568,7 @@
     <header class="site-header">
       <!-- Header logo — clickable, Contact page only (Task 2) -->
       <a class="header-logo" onclick="showPage('home')" title="Go to Home" href="javascript:void(0)" aria-label="Home">
-        <img src="images/logo.gif" alt="Lindmill Designs"
+        <img src="images/updated-logo.gif" alt="Lindmill Designs"
              onerror="this.style.display='none';">
       </a>
       <nav class="header-nav">
@@ -1487,7 +1580,7 @@
 
       <!-- Logo badge -->
       <div class="about-badge">
-        <img src="images/logo.gif" alt="Lindmill Designs"
+        <img src="images/updated-logo.gif" alt="Lindmill Designs"
              onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
         <div class="about-badge-text" style="display:none;">LINDMILL<br>DESIGNS</div>
       </div>
@@ -1560,10 +1653,134 @@
 
     </div>
 
-    <div class="about-footer">
-      <button class="btn-lime" onclick="showPage('work')">See My Work</button>
-      <!-- Portfolio modal button (Task 9) -->
-      <button class="btn-pink" onclick="openPortfolioModal()">Portfolio</button>
+    <!-- Contact page footer — work-style with RESUME button (Update 2) -->
+    <div class="work-footer">
+      <button class="btn-pink" onclick="showPage('resume')" style="letter-spacing:0.12em;">RESUME</button>
+      <div class="work-footer-socials">
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+          </svg>
+        </a>
+        <a href="https://www.linkedin.com/" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+          </svg>
+        </a>
+        <a href="mailto:thelindamiller@gmail.com" title="Email" aria-label="Email">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ============================================================
+       RESUME PAGE (Update 2)
+  ============================================================ -->
+  <section class="page" id="resume">
+
+    <header class="site-header">
+      <a class="header-logo" onclick="showPage('home')" title="Go to Home" href="javascript:void(0)" aria-label="Home">
+        <img src="images/updated-logo.gif" alt="Lindmill Designs"
+             onerror="this.style.display='none';">
+      </a>
+      <nav class="header-nav">
+        <button class="header-nav-link" onclick="showPage('about')">Contact</button>
+        <button class="header-nav-link" onclick="showPage('work')">Work</button>
+      </nav>
+    </header>
+
+    <div class="resume-body">
+      <h1 class="resume-heading">Resume</h1>
+      <p class="resume-sub">Linda Miller — Designer, Illustrator &amp; Motion Artist</p>
+
+      <div class="resume-section-title">Profile</div>
+      <div class="resume-item">
+        <p>A designer who loves to illustrate and use motion to express ideas. Over 15 years of experience working for major fashion retailers, interior designers, food and jewellery innovators, and pet industry brands — developing a versatile, story-driven skill set.</p>
+      </div>
+
+      <div class="resume-section-title">Experience</div>
+      <div class="resume-item">
+        <div class="resume-item-title">Freelance Designer</div>
+        <div class="resume-item-meta">Lindmill Designs · April 2021 – Present</div>
+        <p>
+          <strong>Anglo Windows</strong> — Social media, brand design, video editing<br>
+          <strong>Timothy Oulton Luxury Travel</strong> — Content writing for 63+ hotel web pages<br>
+          <strong>The Really Great Teacher Co.</strong> — Video and motion design for 231+ videos
+        </p>
+      </div>
+      <div class="resume-item">
+        <div class="resume-item-title">In-House Designer</div>
+        <div class="resume-item-meta">January 2011 – April 2021</div>
+        <p>
+          <strong>Rogz Pet Gear</strong> — Social media, print design, website updates, product launches<br>
+          <strong>Root 360</strong> — Logo design, brand launches, vehicle branding<br>
+          <strong>Hamiltons in Creative Company</strong> — Advertising, food labels, signage<br>
+          <strong>Triumph Lingerie</strong> — Catalogues, displays, fabric design
+        </p>
+      </div>
+
+      <div class="resume-section-title">Skills</div>
+      <p style="font-size:0.82rem;color:#143465;margin-bottom:0.5rem;font-style:italic;">Design</p>
+      <div class="resume-skills" style="margin-bottom:1rem;">
+        <span class="resume-skill-tag">Illustration</span>
+        <span class="resume-skill-tag">2D Animation</span>
+        <span class="resume-skill-tag">Video Editing</span>
+        <span class="resume-skill-tag">Photo Editing</span>
+        <span class="resume-skill-tag">Textile Design</span>
+        <span class="resume-skill-tag">Layout</span>
+        <span class="resume-skill-tag">Web Design</span>
+      </div>
+      <p style="font-size:0.82rem;color:#143465;margin-bottom:0.5rem;font-style:italic;">Writing</p>
+      <div class="resume-skills" style="margin-bottom:1rem;">
+        <span class="resume-skill-tag">Copywriting</span>
+        <span class="resume-skill-tag">Social Media Content</span>
+      </div>
+      <p style="font-size:0.82rem;color:#143465;margin-bottom:0.5rem;font-style:italic;">Software</p>
+      <div class="resume-skills">
+        <span class="resume-skill-tag">Illustrator</span>
+        <span class="resume-skill-tag">Photoshop</span>
+        <span class="resume-skill-tag">After Effects</span>
+        <span class="resume-skill-tag">InDesign</span>
+        <span class="resume-skill-tag">Animate</span>
+        <span class="resume-skill-tag">Figma</span>
+        <span class="resume-skill-tag">Office Suite</span>
+      </div>
+
+      <div class="resume-section-title">Contact</div>
+      <div class="resume-item">
+        <p>
+          Email: <a href="mailto:thelindamiller@gmail.com" class="about-email" style="font-size:0.95rem;">thelindamiller@gmail.com</a><br>
+          Instagram: <a href="https://www.instagram.com/thelindamiller" target="_blank" rel="noopener" class="about-email" style="font-size:0.95rem;">@thelindamiller</a><br>
+          LinkedIn: <a href="https://www.linkedin.com/in/thelindamiller" target="_blank" rel="noopener" class="about-email" style="font-size:0.95rem;">thelindamiller</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Resume page footer -->
+    <div class="work-footer">
+      <button class="btn-pink" onclick="showPage('about')" style="letter-spacing:0.12em;">GET IN TOUCH</button>
+      <div class="work-footer-socials">
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+          </svg>
+        </a>
+        <a href="https://www.linkedin.com/" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+          </svg>
+        </a>
+        <a href="mailto:thelindamiller@gmail.com" title="Email" aria-label="Email">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+          </svg>
+        </a>
+      </div>
     </div>
 
   </section>
