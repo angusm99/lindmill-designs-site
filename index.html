@@ -57,6 +57,22 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Nunito:wght@400;600;800;900&display=swap" rel="stylesheet">
 
   <style>
+    /* ---- Custom font faces ---- */
+    @font-face {
+      font-family: 'Narnia';
+      src: url('fonts/Narnia.ttf') format('truetype'),
+           url('fonts/Narnia.otf') format('opentype');
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'BarlowEB';
+      src: url('fonts/Barlow-ExtraBold.ttf') format('truetype');
+      font-weight: 800;
+      font-display: swap;
+    }
+  </style>
+
+  <style>
 
     /* ================================================
        RESET & CSS VARIABLES
@@ -923,6 +939,248 @@
       .modal-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
+    /* ================================================
+       TYPOGRAPHY — Narnia / Barlow EB / Arial Rounded
+    ================================================ */
+    .wordmark, .wordmark-sub {
+      font-family: 'Narnia', 'Fredoka', sans-serif;
+      color: #d9ff76;
+      letter-spacing: 0.03em;
+    }
+    .work-heading, .about-hello, .modal-title {
+      font-family: 'Narnia', 'Fredoka', sans-serif;
+      color: #d9ff76;
+      letter-spacing: 0.03em;
+    }
+    /* Work heading is on white bg — override to navy */
+    .work-heading { color: var(--navy); }
+    /* Modal title is on dark bg — keep lime */
+    .modal-title  { color: #d9ff76; }
+    /* About hello — already lime, keep */
+
+    .filter-pill, .tile-label, .work-hint, .work-intro {
+      font-family: 'BarlowEB', 'Fredoka', sans-serif;
+      font-weight: 800;
+    }
+    .filter-pill { color: var(--navy); letter-spacing: 0; }
+    .filter-pill:hover, .filter-pill.active { color: var(--white); }
+
+    body, p, .about-bio, .home-tagline, .modal-desc {
+      font-family: 'Arial Rounded MT Bold', 'Arial Rounded MT', 'Nunito', Arial, sans-serif;
+      letter-spacing: 0.01em;
+    }
+
+    /* ================================================
+       HERO LOGO (Task 1)
+    ================================================ */
+    .hero-logo {
+      max-width: 600px;
+      width: 90%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      user-select: none;
+      filter: drop-shadow(0 0 60px rgba(217,255,118,0.18));
+    }
+
+    /* ================================================
+       HEADER LOGO — true transparency (Task 2)
+    ================================================ */
+    .header-logo {
+      background: transparent !important;
+      border-radius: 0 !important;
+      border: none;
+    }
+    .header-logo img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* ================================================
+       FILTER PILLS — no border (Task 4)
+    ================================================ */
+    .filter-pill {
+      border: none !important;
+      outline: none !important;
+      background: rgba(6,16,46,0.08);
+    }
+    .filter-pill:hover,
+    .filter-pill.active {
+      background: var(--pink);
+      border: none !important;
+    }
+
+    /* ================================================
+       WORK FOOTER — redesign (Task 5)
+    ================================================ */
+    .work-footer {
+      text-align: center;
+      padding: 3rem 2rem 2.5rem;
+      margin-top: 2rem;
+      background: var(--navy);
+      border-top: 1px solid rgba(255,255,255,0.15);
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;
+    }
+    .work-footer-socials {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+    .work-footer-socials a {
+      color: rgba(255,255,255,0.38);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .work-footer-socials a:hover { color: var(--lime); }
+
+    /* ================================================
+       SCROLL-TO-TOP BUTTON (Task 6)
+    ================================================ */
+    #scrollToTopBtn {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      background: transparent;
+      border: none;
+      color: var(--lime);
+      font-size: 2rem;
+      line-height: 1;
+      cursor: pointer;
+      z-index: 900;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      text-shadow: 0 0 12px rgba(199,255,62,0.5);
+    }
+    #scrollToTopBtn.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* ================================================
+       PROJECT MODAL REDESIGN (Task 7)
+    ================================================ */
+    /* Override white card to full-dark layout */
+    .modal-overlay {
+      padding: 0;
+      align-items: stretch;
+    }
+    .modal-card {
+      background: var(--navy);
+      border-radius: 0;
+      max-width: 100%;
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      box-shadow: none;
+      overflow: hidden;
+    }
+    .modal-close {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 10;
+    }
+    .modal-text-section {
+      padding: 4rem 2.5rem 1.5rem;
+      max-width: 860px;
+      margin: 0 auto;
+      width: 100%;
+      flex-shrink: 0;
+      color: white;
+    }
+    .modal-title {
+      font-size: clamp(2.2rem, 6vw, 5rem);
+      margin-bottom: 0.5rem;
+    }
+    .modal-desc {
+      font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+      color: rgba(255,255,255,0.7);
+      line-height: 1.65;
+      margin-bottom: 0.5rem;
+    }
+    .modal-role {
+      font-size: 0.88rem;
+      color: var(--lime);
+      font-family: 'BarlowEB', 'Fredoka', sans-serif;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 0;
+    }
+    .modal-gallery-section {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+      background: #030b1e;
+      padding: 1.5rem 0 1.5rem;
+    }
+    .gallery-scroll {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      padding: 0 2.5rem;
+      height: 100%;
+      align-items: center;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(199,255,62,0.3) transparent;
+    }
+    .gallery-scroll::-webkit-scrollbar { height: 4px; }
+    .gallery-scroll::-webkit-scrollbar-track { background: transparent; }
+    .gallery-scroll::-webkit-scrollbar-thumb { background: rgba(199,255,62,0.3); border-radius: 2px; }
+    .gallery-scroll img {
+      flex-shrink: 0;
+      max-width: 80vw;
+      max-height: calc(100% - 8px);
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      scroll-snap-align: center;
+      border-radius: 6px;
+      cursor: zoom-in;
+      display: block;
+    }
+    .gallery-counter {
+      position: absolute;
+      bottom: 0.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.6);
+      font-family: 'BarlowEB', 'Fredoka', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+    /* Loading state */
+    .gallery-loading {
+      color: rgba(255,255,255,0.4);
+      font-size: 0.9rem;
+      padding: 2rem 2.5rem;
+      align-self: center;
+    }
+
+    @media (max-width: 700px) {
+      .modal-text-section { padding: 3.5rem 1.2rem 1rem; }
+      .gallery-scroll { padding: 0 1rem; gap: 8px; }
+      .gallery-scroll img { max-width: 90vw; }
+    }
+
   </style>
 </head>
 <body>
@@ -1035,12 +1293,19 @@
     <!-- Contact button (top-left) -->
     <button class="btn-lime home-btn-contact" onclick="showPage('about')">Contact</button>
 
-    <!-- Central wordmark block -->
+    <!-- Hero logo (Task 1) -->
     <div class="home-centre">
-      <div class="wordmark">LINDMILL</div>
-      <div class="wordmark-sub">DESIGNS</div>
-      <div class="home-divider"></div>
-      <p class="home-tagline">Motion Design + Visual Storytelling</p>
+      <img id="heroLogo" class="hero-logo"
+           src="images/lindmill-logo.png"
+           alt="Lindmill Designs"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+      <!-- Fallback wordmark if logo fails to load -->
+      <div style="display:none;">
+        <div class="wordmark">LINDMILL</div>
+        <div class="wordmark-sub">DESIGNS</div>
+        <div class="home-divider"></div>
+        <p class="home-tagline">Motion Design + Visual Storytelling</p>
+      </div>
     </div>
 
     <!-- Work button (bottom) -->
@@ -1056,13 +1321,13 @@
     <a id="main-content"></a>
 
     <header class="site-header">
-      <div class="header-logo" onclick="showPage('home')" title="Home">
-        <img src="images/logo.gif" alt="Lindmill"
-             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-        <div class="header-logo-text" style="display:none;">LIND<br>MILL</div>
-      </div>
+      <!-- Header logo — clickable, Work page only (Task 2) -->
+      <a class="header-logo" onclick="showPage('home')" title="Go to Home" href="javascript:void(0)" aria-label="Home">
+        <img src="images/logo.gif" alt="Lindmill Designs"
+             onerror="this.style.display='none';">
+      </a>
       <nav class="header-nav">
-        <button class="header-nav-link" onclick="showPage('home')">Home</button>
+        <!-- HOME button removed per Task 3 — logo serves as home link -->
         <button class="btn-pink" style="padding:7px 16px; font-size:0.85rem;" onclick="showPage('about')">Contact</button>
       </nav>
     </header>
@@ -1073,10 +1338,11 @@
       <p class="work-intro">Brand-focused motion designer and illustrator — specialising in branding, visual storytelling, and bringing ideas to life through design and motion.</p>
       <p class="work-hint">*Select a project to view the full gallery.</p>
 
-      <!-- Category filter pills -->
+      <!-- Category filter pills — 4 categories, no borders (Task 4) -->
       <div class="filter-bar">
         <button class="filter-pill active" data-filter="all">All</button>
-        <button class="filter-pill" data-filter="motion-illustration">Motion + Illustration</button>
+        <button class="filter-pill" data-filter="animation">Animation</button>
+        <button class="filter-pill" data-filter="illustration">Illustration</button>
         <button class="filter-pill" data-filter="digital">Digital</button>
         <button class="filter-pill" data-filter="branding">Branding</button>
       </div>
@@ -1084,84 +1350,84 @@
       <!-- 4-column project grid - matches Linda's 12 ALL WORK thumbnails -->
       <div class="project-grid" id="projectGrid">
 
-        <!-- 1. ANIMATED -->
-        <div class="project-tile" data-category="motion-illustration" onclick="openModal('animated')">
+        <!-- 1. ANIMATED — category: animation -->
+        <div class="project-tile" data-category="animation" onclick="openModal('animated')">
           <img class="tile-img" loading="lazy" decoding="async" src="images/thumbnails/01.gif" alt="Animated">
           <div class="tile-pink-overlay"></div>
           <div class="tile-label">Animated</div>
         </div>
 
-        <!-- 2. DRAWN -->
-        <div class="project-tile" data-category="motion-illustration" onclick="openModal('drawn')">
+        <!-- 2. DRAWN — category: illustration -->
+        <div class="project-tile" data-category="illustration" onclick="openModal('drawn')">
           <img class="tile-img" loading="lazy" decoding="async" src="images/thumbnails/02.jpg" alt="Drawn">
           <div class="tile-pink-overlay"></div>
           <div class="tile-label">Drawn</div>
         </div>
 
-        <!-- 3. ILLUSTRATED -->
-        <div class="project-tile" data-category="motion-illustration" onclick="openModal('illustrated')">
+        <!-- 3. ILLUSTRATED — category: illustration -->
+        <div class="project-tile" data-category="illustration" onclick="openModal('illustrated')">
           <img class="tile-img" loading="lazy" decoding="async" src="images/thumbnails/03.jpg" alt="Illustrated">
           <div class="tile-pink-overlay"></div>
           <div class="tile-label">Illustrated</div>
         </div>
 
-        <!-- 4. PAINTED -->
-        <div class="project-tile" data-category="motion-illustration" onclick="openModal('painted')">
+        <!-- 4. PAINTED — category: illustration -->
+        <div class="project-tile" data-category="illustration" onclick="openModal('painted')">
           <img class="tile-img" loading="lazy" decoding="async" src="images/thumbnails/04.jpg" alt="Painted">
           <div class="tile-pink-overlay"></div>
           <div class="tile-label">Painted</div>
         </div>
 
-        <!-- 5. VIDEO EDITING -->
+        <!-- 5. VIDEO EDITING — category: digital -->
         <div class="project-tile" data-category="digital" onclick="openModal('video-editing')">
           <img class="tile-img" loading="lazy" decoding="async" src="images/thumbnails/05.jpg" alt="Video Editing">
           <div class="tile-pink-overlay"></div>
           <div class="tile-label">Video Editing</div>
         </div>
 
-        <!-- 6. WEBSITE LAYOUT -->
+        <!-- 6. WEBSITE LAYOUT — category: digital -->
         <div class="project-tile" data-category="digital" onclick="openModal('website-layout')">
           <img class="tile-img" loading="lazy" decoding="async" src="images/thumbnails/06.jpg" alt="Website Layout">
           <div class="tile-pink-overlay"></div>
           <div class="tile-label">Website Layout</div>
         </div>
 
-        <!-- 7. SOCIAL MEDIA -->
+        <!-- 7. SOCIAL MEDIA — category: digital -->
         <div class="project-tile" data-category="digital" onclick="openModal('social-media')">
           <img class="tile-img" loading="lazy" decoding="async" src="images/thumbnails/07.jpg" alt="Social Media">
           <div class="tile-pink-overlay"></div>
           <div class="tile-label">Social Media</div>
         </div>
 
-        <!-- 8. CONTENT WRITING -->
+        <!-- 8. CONTENT WRITING — category: digital -->
         <div class="project-tile" data-category="digital" onclick="openModal('content-writing')">
           <img class="tile-img" loading="lazy" decoding="async" src="images/thumbnails/08.jpg" alt="Content Writing">
           <div class="tile-pink-overlay"></div>
           <div class="tile-label">Content Writing</div>
         </div>
 
-        <!-- 9. FOOD LABEL DESIGN -->
+        <!-- 9. FOOD LABEL DESIGN — category: branding -->
         <div class="project-tile" data-category="branding" onclick="openModal('food-labels')">
           <img class="tile-img" loading="lazy" decoding="async" src="images/thumbnails/09.jpg" alt="Food Label Design">
           <div class="tile-pink-overlay"></div>
           <div class="tile-label">Food Label Design</div>
         </div>
 
-        <!-- 10. LOGO DESIGN -->
+        <!-- 10. LOGO DESIGN — category: branding -->
         <div class="project-tile" data-category="branding" onclick="openModal('logo-design')">
           <img class="tile-img" loading="lazy" decoding="async" src="images/thumbnails/10.jpg" alt="Logo Design">
           <div class="tile-pink-overlay"></div>
           <div class="tile-label">Logo Design</div>
         </div>
 
-        <!-- 11. TEXTILE DESIGN -->
+        <!-- 11. TEXTILE DESIGN — category: branding -->
         <div class="project-tile" data-category="branding" onclick="openModal('textile-design')">
           <img class="tile-img" loading="lazy" decoding="async" src="images/thumbnails/11.jpg" alt="Textile Design">
           <div class="tile-pink-overlay"></div>
           <div class="tile-label">Textile Design</div>
         </div>
 
-        <!-- 12. LAYOUT -->
+        <!-- 12. LAYOUT — category: branding -->
         <div class="project-tile" data-category="branding" onclick="openModal('layout')">
           <img class="tile-img" loading="lazy" decoding="async" src="images/thumbnails/12.jpg" alt="Layout">
           <div class="tile-pink-overlay"></div>
@@ -1171,9 +1437,31 @@
       </div>
     </div>
 
+    <!-- Work footer — divider + GET IN TOUCH + socials (Task 5) -->
     <div class="work-footer">
-      <button class="btn-pink" onclick="showPage('about')">Get in Touch</button>
-      <button class="btn-lime" onclick="showPage('home')">&uarr; Home</button>
+      <button class="btn-pink" onclick="showPage('about')" style="letter-spacing:0.12em;">GET IN TOUCH</button>
+      <div class="work-footer-socials">
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+          </svg>
+        </a>
+        <a href="https://www.linkedin.com/" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+          </svg>
+        </a>
+        <a href="mailto:thelindamiller@gmail.com" title="Email" aria-label="Email">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+          </svg>
+        </a>
+        <a href="https://www.behance.net/" target="_blank" rel="noopener" title="Behance" aria-label="Behance">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 6h7a4 4 0 0 1 0 8H2z"/><path d="M2 14h9a4 4 0 0 1 0 8H2z"/><line x1="14" y1="7" x2="22" y2="7"/><path d="M14 11c0-3.3 2.7-5 5.5-5S25 7.7 25 11"/><line x1="14" y1="16" x2="22" y2="16"/>
+          </svg>
+        </a>
+      </div>
     </div>
 
   </section>
@@ -1185,14 +1473,13 @@
   <section class="page" id="about">
 
     <header class="site-header">
-      <div class="header-logo" onclick="showPage('home')" title="Home">
-        <img src="images/logo.gif" alt="Lindmill"
-             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-        <div class="header-logo-text" style="display:none;">LIND<br>MILL</div>
-      </div>
+      <!-- Header logo — clickable, Contact page only (Task 2) -->
+      <a class="header-logo" onclick="showPage('home')" title="Go to Home" href="javascript:void(0)" aria-label="Home">
+        <img src="images/logo.gif" alt="Lindmill Designs"
+             onerror="this.style.display='none';">
+      </a>
       <nav class="header-nav">
         <button class="header-nav-link" onclick="showPage('work')">Work</button>
-        <button class="header-nav-link" onclick="showPage('home')">Home</button>
       </nav>
     </header>
 
@@ -1275,21 +1562,35 @@
 
     <div class="about-footer">
       <button class="btn-lime" onclick="showPage('work')">See My Work</button>
-      <button class="btn-lime" onclick="showPage('home')">&uarr; Home</button>
+      <!-- Portfolio modal button (Task 9) -->
+      <button class="btn-pink" onclick="openPortfolioModal()">Portfolio</button>
     </div>
 
   </section>
 
 
+  <!-- Floating scroll-to-top chevron (Task 6) -->
+  <button id="scrollToTopBtn" aria-label="Scroll to top" title="Back to top">&#8593;</button>
+
   <!-- ============================================================
-       PROJECT MODAL
+       PROJECT MODAL — Text + Horizontal Gallery (Task 7)
   ============================================================ -->
-  <div class="modal-overlay" id="modalOverlay" onclick="modalBgClick(event)" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+  <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
     <div class="modal-card" id="modalCard">
       <button class="modal-close" onclick="closeModal()" aria-label="Close gallery">&times;</button>
-      <h2 class="modal-title"  id="modalTitle"></h2>
-      <p  class="modal-desc"   id="modalDesc"></p>
-      <div class="modal-grid"  id="modalGrid"></div>
+
+      <!-- A. Text section -->
+      <div class="modal-text-section">
+        <h2 class="modal-title" id="modalTitle"></h2>
+        <p  class="modal-desc"  id="modalDesc"></p>
+        <p  class="modal-role"  id="modalRole"></p>
+      </div>
+
+      <!-- B. Horizontal snap-scroll gallery -->
+      <div class="modal-gallery-section">
+        <div class="gallery-scroll" id="modalGrid"></div>
+        <div class="gallery-counter" id="galleryCounter" aria-live="polite"></div>
+      </div>
     </div>
   </div>
 
@@ -1342,7 +1643,7 @@
       });
     })();
 
-    /* ---- FILTER PILLS ---- */
+    /* ---- FILTER PILLS (Task 4 — updated category names) ---- */
     document.querySelectorAll('.filter-pill').forEach(pill => {
       pill.addEventListener('click', () => {
         document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
@@ -1356,80 +1657,83 @@
 
     /* ---- PROJECT DATA — matches Linda's 12 ALL WORK thumbnails ---- */
     const PROJECTS = {
-      'animated':        { title:'Animated',         desc:'Animated motion work — bringing brands and stories to life through movement.', folder:'images/animated',         thumb:'images/thumbnails/01.gif', maxCount:50 },
-      'drawn':           { title:'Drawn',            desc:'Hand-drawn illustrations across editorial and brand work.',                       folder:'images/drawn',            thumb:'images/thumbnails/02.jpg', maxCount:50 },
-      'illustrated':     { title:'Illustrated',      desc:'Digital illustration spanning character, editorial, and decorative styles.',     folder:'images/illustrated',      thumb:'images/thumbnails/03.jpg', maxCount:50 },
-      'painted':         { title:'Painted',          desc:'Painted work — traditional and digital painting and texture studies.',           folder:'images/painted',          thumb:'images/thumbnails/04.jpg', maxCount:50 },
-      'video-editing':   { title:'Video Editing',    desc:'Video editing and post-production for brand and social content.',                folder:'images/video-editing',    thumb:'images/thumbnails/05.jpg', maxCount:50 },
-      'website-layout':  { title:'Website Layout',   desc:'Web layouts, UI concepts, and page design.',                                     folder:'images/website-layout',   thumb:'images/thumbnails/06.jpg', maxCount:50 },
-      'social-media':    { title:'Social Media',     desc:'Social media content, templates, and campaign graphics.',                        folder:'images/social-media',     thumb:'images/thumbnails/07.jpg', maxCount:50 },
-      'content-writing': { title:'Content Writing',  desc:'Copywriting and editorial content for brands and campaigns.',                    folder:'images/content-writing',  thumb:'images/thumbnails/08.jpg', maxCount:50 },
-      'food-labels':     { title:'Food Label Design',desc:'Product label design — honey, bacon, coffee, tuna and more.',                    folder:'images/food-labels',      thumb:'images/thumbnails/09.jpg', maxCount:50 },
-      'logo-design':     { title:'Logo Design',      desc:'Logo and brand identity design across multiple sectors.',                        folder:'images/logo-design',      thumb:'images/thumbnails/10.jpg', maxCount:50 },
-      'textile-design':  { title:'Textile Design',   desc:'Pattern and textile design for print and fabric applications.',                  folder:'images/textile-design',   thumb:'images/thumbnails/11.jpg', maxCount:50 },
-      'layout':          { title:'Layout + Signage', desc:'Editorial layout, signage, and applied brand collateral.',                       folder:'images/layout',           thumb:'images/thumbnails/12.jpg', maxCount:50 },
+      'animated':        { title:'Animated',         role:'Motion Designer',                   desc:'Animated motion work — bringing brands and stories to life through movement.',  folder:'images/animated',         thumb:'images/thumbnails/01.gif', maxCount:50 },
+      'drawn':           { title:'Drawn',            role:'Illustrator',                        desc:'Hand-drawn illustrations across editorial and brand work.',                     folder:'images/drawn',            thumb:'images/thumbnails/02.jpg', maxCount:50 },
+      'illustrated':     { title:'Illustrated',      role:'Illustrator',                        desc:'Digital illustration spanning character, editorial, and decorative styles.',    folder:'images/illustrated',      thumb:'images/thumbnails/03.jpg', maxCount:50 },
+      'painted':         { title:'Painted',          role:'Illustrator',                        desc:'Painted work — traditional and digital painting and texture studies.',          folder:'images/painted',          thumb:'images/thumbnails/04.jpg', maxCount:50 },
+      'video-editing':   { title:'Video Editing',    role:'Video Editor',                       desc:'Video editing and post-production for brand and social content.',               folder:'images/video-editing',    thumb:'images/thumbnails/05.jpg', maxCount:50 },
+      'website-layout':  { title:'Website Layout',   role:'UI Designer',                        desc:'Web layouts, UI concepts, and page design.',                                    folder:'images/website-layout',   thumb:'images/thumbnails/06.jpg', maxCount:50 },
+      'social-media':    { title:'Social Media',     role:'Social Media Designer',              desc:'Social media content, templates, and campaign graphics.',                       folder:'images/social-media',     thumb:'images/thumbnails/07.jpg', maxCount:50 },
+      'content-writing': { title:'Content Writing',  role:'Copywriter & Content Creator',       desc:'Copywriting and editorial content for brands and campaigns.',                   folder:'images/content-writing',  thumb:'images/thumbnails/08.jpg', maxCount:50 },
+      'food-labels':     { title:'Food Label Design',role:'Brand Designer',                     desc:'Product label design — honey, bacon, coffee, tuna and more.',                  folder:'images/food-labels',      thumb:'images/thumbnails/09.jpg', maxCount:50 },
+      'logo-design':     { title:'Logo Design',      role:'Brand Designer & Creative Director', desc:'Logo and brand identity design across multiple sectors.',                       folder:'images/logo-design',      thumb:'images/thumbnails/10.jpg', maxCount:50 },
+      'textile-design':  { title:'Textile Design',   role:'Textile & Pattern Designer',         desc:'Pattern and textile design for print and fabric applications.',                 folder:'images/textile-design',   thumb:'images/thumbnails/11.jpg', maxCount:50 },
+      'layout':          { title:'Layout + Signage', role:'Designer',                           desc:'Editorial layout, signage, and applied brand collateral.',                      folder:'images/layout',           thumb:'images/thumbnails/12.jpg', maxCount:50 },
     };
 
-    /* ---- MODAL OPEN ----
-       Strategy: probe images sequentially. Show all that load.
-       If none load, fall back to the thumbnail + "Gallery coming soon" message.
+    /* ---- MODAL OPEN — Text section + horizontal snap gallery (Task 7) ----
+       Probes images sequentially; builds horizontal scroll strip.
+       Clicking any image opens the fullscreen lightbox.
     */
     function openModal(key) {
       const p = PROJECTS[key];
       if (!p) return;
 
+      // Populate text section
       document.getElementById('modalTitle').textContent = p.title;
       document.getElementById('modalDesc').textContent  = p.desc;
+      document.getElementById('modalRole').innerHTML    = p.role ? `<strong>My Role:</strong> ${p.role}` : '';
 
-      const grid = document.getElementById('modalGrid');
-      grid.innerHTML = '<div class="modal-loading">Loading gallery…</div>';
+      // Show loading state in gallery
+      const gallery = document.getElementById('modalGrid');
+      gallery.innerHTML = '<div class="gallery-loading">Loading gallery…</div>';
+      document.getElementById('galleryCounter').textContent = '';
 
       const overlay = document.getElementById('modalOverlay');
       overlay.classList.add('open');
       overlay.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
-      // Move focus to close button after a tick so screen readers announce the dialog
       setTimeout(() => overlay.querySelector('.modal-close')?.focus(), 50);
 
-      // Probe candidate images (try .jpg, .png, .gif at each index)
+      // Probe images
       const exts = ['jpg','png','gif','jpeg'];
       const probes = [];
       for (let i = 1; i <= p.maxCount; i++) {
-        const num = String(i).padStart(2, '0');
-        probes.push(probeImage(p.folder, num, exts));
+        probes.push(probeImage(p.folder, String(i).padStart(2,'0'), exts));
       }
 
       Promise.all(probes).then(results => {
         const found = results.filter(Boolean);
-        grid.innerHTML = '';
+        gallery.innerHTML = '';
 
-        if (found.length === 0) {
-          // No gallery images — show thumbnail as the single featured image
-          grid.classList.add('single-hero');
-          const heroDiv = document.createElement('div');
-          heroDiv.className = 'modal-hero';
-          const heroImg = document.createElement('img');
-          heroImg.src = p.thumb;
-          heroImg.alt = p.title;
-          heroImg.style.cursor = 'zoom-in';
-          heroImg.addEventListener('click', () => openLightbox([p.thumb], 0));
-          heroDiv.appendChild(heroImg);
-          grid.appendChild(heroDiv);
+        // If no gallery images, use thumbnail as single image
+        const images = found.length > 0 ? found : [p.thumb];
+
+        images.forEach((src, idx) => {
+          const img = document.createElement('img');
+          img.src = src;
+          img.alt = `${p.title} — image ${idx + 1}`;
+          img.loading = 'lazy';
+          img.decoding = 'async';
+          img.addEventListener('click', () => openLightbox(images, idx));
+          gallery.appendChild(img);
+        });
+
+        // Counter
+        const counter = document.getElementById('galleryCounter');
+        if (images.length > 1) {
+          counter.textContent = `1 / ${images.length}`;
+          // Update counter on scroll
+          gallery.addEventListener('scroll', () => {
+            const scrollLeft = gallery.scrollLeft;
+            const firstImg = gallery.querySelector('img');
+            if (!firstImg) return;
+            const imgWidth = firstImg.offsetWidth + 12; // gap
+            const idx = Math.round(scrollLeft / imgWidth);
+            counter.textContent = `${Math.min(idx + 1, images.length)} / ${images.length}`;
+          }, { passive: true });
         } else {
-          grid.classList.remove('single-hero');
-          found.forEach((src, idx) => {
-            const item = document.createElement('div');
-            item.className = 'modal-item';
-            const img = document.createElement('img');
-            img.src = src;
-            img.alt = p.title;
-            img.loading = 'lazy';
-            img.decoding = 'async';
-            img.style.cursor = 'zoom-in';
-            img.addEventListener('click', () => openLightbox(found, idx));
-            item.appendChild(img);
-            grid.appendChild(item);
-          });
+          counter.textContent = '';
         }
       });
     }
@@ -1457,11 +1761,40 @@
       m.classList.remove('open');
       m.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
+      // Reset gallery scroll & counter
+      const gallery = document.getElementById('modalGrid');
+      if (gallery) gallery.scrollLeft = 0;
       if (_modalTrigger) { try { _modalTrigger.focus(); } catch(_){} _modalTrigger = null; }
     }
-    function modalBgClick(e) {
+    // Close on backdrop click (overlay itself, not the card)
+    document.getElementById('modalOverlay').addEventListener('click', e => {
       if (e.target === document.getElementById('modalOverlay')) closeModal();
+    });
+
+    /* ---- PORTFOLIO MODAL (Task 9) ---- */
+    function openPortfolioModal() {
+      // Build a synthetic project entry for the portfolio
+      const portfolio = {
+        title:    'Portfolio',
+        role:     'Creative Director & Designer',
+        desc:     'A curated selection of brand-focused motion design and illustration work — bringing ideas to life through visual storytelling, movement, and colour.',
+        folder:   'images/social-media',  // default gallery; replace with portfolio-specific images when available
+        thumb:    'images/thumbnails/07.jpg',
+        maxCount: 50,
+      };
+      // Temporarily inject into PROJECTS for reuse of openModal
+      PROJECTS['_portfolio'] = portfolio;
+      openModal('_portfolio');
     }
+
+    /* ---- SCROLL-TO-TOP BUTTON (Task 6) ---- */
+    (function () {
+      const btn = document.getElementById('scrollToTopBtn');
+      window.addEventListener('scroll', () => {
+        btn.classList.toggle('visible', window.scrollY > 300);
+      }, { passive: true });
+      btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    })();
 
     /* ---- LIGHTBOX (with prev/next navigation) ---- */
     let _galleryImages = [];  // current set of gallery image URLs
