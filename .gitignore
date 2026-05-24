@@ -15,3 +15,7 @@ desktop.ini
 # Logs and temp
 *.log
 *.tmp
+
+# Local image backups (not for repo)
+_originals/
+
