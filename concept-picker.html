@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lindmill Designs — Visual Direction Concepts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=DM+Serif+Display&family=Nunito:wght@400;600;800&family=Bebas+Neue&family=Archivo+Black&family=Inter:wght@400;500;700&family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #06102e;
+      --lime: #d9ff76;
+      --pink: #fe2786;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: #f5f2ec;
+      color: #06102e;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ────────────────────────────────────────────────── */
+    .picker-header {
+      background: var(--navy);
+      color: #fff;
+      text-align: center;
+      padding: 56px 24px 48px;
+    }
+    .picker-header .wordmark {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 0.85rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--lime);
+      margin-bottom: 20px;
+    }
+    .picker-header h1 {
+      font-family: 'Lora', serif;
+      font-weight: 700;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .picker-header h1 span { color: var(--pink); }
+    .picker-header p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.75);
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    /* ── INSTRUCTION BAR ───────────────────────────────────────── */
+    .instruction-bar {
+      background: var(--pink);
+      color: #fff;
+      text-align: center;
+      padding: 14px 24px;
+      font-weight: 800;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ── DIRECTION CARDS ───────────────────────────────────────── */
+    .directions {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .direction {
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Direction labels */
+    .dir-label {
+      position: absolute;
+      top: 32px;
+      left: 32px;
+      font-weight: 800;
+      font-size: 0.78rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 100px;
+      z-index: 10;
+    }
+
+    /* ── DIRECTION A — WARM STORYBOOK ──────────────────────────── */
+    .dir-a {
+      background: #FAF7F0;
+    }
+    .dir-a .dir-label { background: #06102e; color: #d9ff76; }
+    .dir-a-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 580px;
+    }
+    .dir-a-left {
+      padding: 80px 56px 56px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 28px;
+    }
+    .dir-a-left .dir-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      line-height: 1.0;
+      color: #06102e;
+    }
+    .dir-a-left .dir-tagline {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #fe2786;
+    }
+    .dir-a-left .dir-desc {
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: #3d3224;
+      max-width: 400px;
+    }
+    .palette-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .swatch {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 2px solid rgba(0,0,0,0.08);
+      flex-shrink: 0;
+    }
+    .swatch-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #888;
+      margin-left: 4px;
+    }
+    .type-sample {
+      background: rgba(0,0,0,0.04);
+      border-radius: 12px;
+      padding: 20px 24px;
+    }
+    .type-sample .ts-display {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem;
+      color: #06102e;
+      line-height: 1.1;
+    }
+    .type-sample .ts-sub {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #fe2786;
+      margin-top: 4px;
+    }
+    .type-sample .ts-body {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 8px;
+      line-height: 1.6;
+    }
+    .dir-a-right {
+      background: #06102e;
+      padding: 80px 40px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      justify-content: center;
+    }
+    /* Mock tiles for Direction A */
+    .mock-grid-a {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .mock-tile-a {
+      aspect-ratio: 1;
+      border-radius: 18px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .mock-tile-a:hover { transform: scale(1.04) rotate(-1deg); }
+    .mock-tile-a .mt-bg {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+    .mock-tile-a .mt-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 8px 10px 10px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 0.75rem;
+      background: rgba(250,247,240,0.92);
+      color: #06102e;
+      text-align: center;
+    }
+    .mock-tile-a:nth-child(1) .mt-bg { background: #FFD6E0; }
+    .mock-tile-a:nth-child(2) .mt-bg { background: #d9ff76; }
+    .mock-tile-a:nth-child(3) .mt-bg { background: #F5E6CC; }
+    .mock-tile-a:nth-child(4) .mt-bg { background: #C8F0FF; }
+    .mock-tile-a:nth-child(5) .mt-bg { background: #F0D9FF; }
+    .mock-tile-a:nth-child(6) .mt-bg { background: #FFE8C8; }
+    .mock-note {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      font-style: italic;
+    }
+
+    /* ── DIRECTION B — KINETIC CUT-OUTS ────────────────────────── */
+    .dir-b { background: #0a0a0a; }
+    .dir-b .dir-label { background: #c8ff3e; color: #0a0a0a; }
+    .dir-b-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 580px;
+    }
+    .dir-b-left {
+      padding: 80px 56px 56px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 28px;
+    }
+    .dir-b-left .dir-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 6vw, 6rem);
+      line-height: 0.9;
+      color: #fff;
+      letter-spacing: 0.02em;
+    }
+    .dir-b-left .dir-name span { color: #c8ff3e; }
+    .dir-b-left .dir-tagline {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #ff2d78;
+    }
+    .dir-b-left .dir-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.65);
+      max-width: 400px;
+    }
+    .type-sample-b {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 20px 24px;
+    }
+    .type-sample-b .ts-display {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.8rem;
+      color: #c8ff3e;
+      line-height: 1.0;
+      letter-spacing: 0.04em;
+    }
+    .type-sample-b .ts-sub {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #ff2d78;
+      margin-top: 6px;
+    }
+    .type-sample-b .ts-body {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.5);
+      margin-top: 8px;
+      line-height: 1.6;
+    }
+    .dir-b-right {
+      padding: 80px 40px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      justify-content: center;
+    }
+    .mock-grid-b {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+    }
+    .mock-tile-b {
+      aspect-ratio: 1;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 85% 100%, 0 100%);
+    }
+    .mock-tile-b:hover { transform: scale(1.06); filter: brightness(1.2); }
+    .mock-tile-b .mt-bg {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+    .mock-tile-b .mt-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 8px 8px 14px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      background: rgba(0,0,0,0.7);
+      color: #c8ff3e;
+      text-align: center;
+    }
+    .mock-tile-b:nth-child(1) .mt-bg { background: #1a1a1a; }
+    .mock-tile-b:nth-child(2) .mt-bg { background: #c8ff3e; }
+    .mock-tile-b:nth-child(3) .mt-bg { background: #ff2d78; }
+    .mock-tile-b:nth-child(4) .mt-bg { background: #2a2a2a; }
+    .mock-tile-b:nth-child(5) .mt-bg { background: #333; }
+    .mock-tile-b:nth-child(6) .mt-bg { background: #ff2d78; }
+
+    /* ── DIRECTION C — PATTERN ARCHIVE ─────────────────────────── */
+    .dir-c { background: #FFF8EF; }
+    .dir-c .dir-label { background: #fe2786; color: #fff; }
+    .dir-c-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 580px;
+    }
+    .dir-c-left {
+      padding: 80px 56px 56px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 28px;
+    }
+    .dir-c-left .dir-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.4rem, 4.5vw, 4rem);
+      line-height: 1.0;
+      color: #06102e;
+    }
+    .dir-c-left .dir-name span { color: #fe2786; }
+    .dir-c-left .dir-tagline {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #2dd4bf;
+    }
+    .dir-c-left .dir-desc {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1rem;
+      line-height: 1.75;
+      color: #3d3224;
+      max-width: 400px;
+    }
+    .type-sample-c {
+      background: #06102e;
+      border-radius: 12px;
+      padding: 20px 24px;
+    }
+    .type-sample-c .ts-display {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 2rem;
+      color: #d9ff76;
+      line-height: 1.1;
+    }
+    .type-sample-c .ts-sub {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #2dd4bf;
+      margin-top: 6px;
+    }
+    .type-sample-c .ts-body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.6);
+      margin-top: 8px;
+      line-height: 1.6;
+    }
+    .dir-c-right {
+      background: #06102e;
+      padding: 80px 40px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Subtle background pattern for Direction C */
+    .dir-c-right::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        45deg,
+        rgba(217,255,118,0.03) 0,
+        rgba(217,255,118,0.03) 1px,
+        transparent 0,
+        transparent 50%
+      );
+      background-size: 20px 20px;
+      pointer-events: none;
+    }
+    .mock-grid-c {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+    }
+    .mock-tile-c {
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: transform 0.3s ease;
+    }
+    .mock-tile-c:hover { transform: translateY(-4px); }
+    .mock-tile-c .mt-bg {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      padding: 24px;
+    }
+    .mock-tile-c .mt-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 10px 12px 12px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: rgba(6,16,46,0.85);
+      color: #d9ff76;
+      border-top: 1px solid rgba(217,255,118,0.2);
+    }
+    .mock-tile-c:nth-child(1) { grid-row: 1 / 2; aspect-ratio: 2/1; }
+    .mock-tile-c:nth-child(1) .mt-bg { background: #fe2786; font-size: 3rem; }
+    .mock-tile-c:nth-child(2) { grid-column: 2; grid-row: 1 / 3; }
+    .mock-tile-c:nth-child(2) .mt-bg { background: #2dd4bf; height: 100%; }
+    .mock-tile-c:nth-child(3) { aspect-ratio: 2/1; }
+    .mock-tile-c:nth-child(3) .mt-bg { background: #d9ff76; }
+    .filter-pills-c {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+    .pill-c {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border: 1px solid rgba(217,255,118,0.3);
+      color: rgba(217,255,118,0.7);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .pill-c.active {
+      background: #d9ff76;
+      color: #06102e;
+      border-color: #d9ff76;
+    }
+
+    /* ── CHOOSE BUTTON ─────────────────────────────────────────── */
+    .choose-bar {
+      padding: 32px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      border-top: 1px solid rgba(0,0,0,0.08);
+    }
+    .dir-a .choose-bar { background: #FAF7F0; border-top-color: rgba(6,16,46,0.1); }
+    .dir-b .choose-bar { background: #0a0a0a; border-top-color: rgba(255,255,255,0.08); }
+    .dir-c .choose-bar { background: #FFF8EF; border-top-color: rgba(6,16,46,0.1); }
+
+    .choose-text {
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+    .dir-a .choose-text { color: #555; }
+    .dir-b .choose-text { color: rgba(255,255,255,0.5); }
+    .dir-c .choose-text { color: #555; }
+
+    .btn-choose {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      border: none;
+      border-radius: 100px;
+      font-weight: 800;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+    .btn-choose:hover { transform: scale(1.04); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+    .dir-a .btn-choose { background: #fe2786; color: #fff; font-family: 'Nunito', sans-serif; }
+    .dir-b .btn-choose { background: #c8ff3e; color: #0a0a0a; font-family: 'Inter', sans-serif; }
+    .dir-c .btn-choose { background: #fe2786; color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; }
+
+    /* ── DIVIDER LABELS ────────────────────────────────────────── */
+    .dir-divider {
+      background: var(--navy);
+      padding: 16px 40px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: rgba(255,255,255,0.3);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    .dir-divider::before, .dir-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(255,255,255,0.1);
+    }
+
+    /* ── FOOTER ────────────────────────────────────────────────── */
+    .picker-footer {
+      background: var(--navy);
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 40px 24px;
+      font-size: 0.85rem;
+      line-height: 1.7;
+    }
+    .picker-footer strong { color: #fff; }
+    .picker-footer a { color: var(--lime); }
+
+    /* ── CHOSEN STATE ──────────────────────────────────────────── */
+    .chosen-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(6,16,46,0.95);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 24px;
+      text-align: center;
+      padding: 40px;
+    }
+    .chosen-overlay.show { display: flex; }
+    .chosen-overlay h2 {
+      font-family: 'Lora', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: #fff;
+    }
+    .chosen-overlay h2 span { color: var(--lime); }
+    .chosen-overlay p { color: rgba(255,255,255,0.7); font-size: 1rem; max-width: 480px; line-height: 1.7; }
+    .chosen-overlay .chosen-direction {
+      background: var(--pink);
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.5rem;
+      padding: 20px 48px;
+      border-radius: 100px;
+      letter-spacing: 0.05em;
+    }
+    .chosen-overlay .btn-reset {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.5);
+      padding: 10px 24px;
+      border-radius: 100px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      margin-top: 8px;
+    }
+    .chosen-overlay .btn-reset:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
+    .chosen-overlay .next-steps {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 24px 32px;
+      text-align: left;
+      max-width: 480px;
+      width: 100%;
+    }
+    .chosen-overlay .next-steps h3 {
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--lime);
+      margin-bottom: 12px;
+    }
+    .chosen-overlay .next-steps li {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-left: 16px;
+      margin-bottom: 4px;
+    }
+
+    /* ── MOBILE ────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .dir-a-inner, .dir-b-inner, .dir-c-inner {
+        grid-template-columns: 1fr;
+      }
+      .dir-a-right, .dir-b-right, .dir-c-right {
+        padding: 40px 24px;
+        min-height: 340px;
+      }
+      .dir-a-left, .dir-b-left, .dir-c-left {
+        padding: 64px 24px 32px;
+      }
+      .mock-tile-c:nth-child(2) { display: none; }
+      .mock-grid-c { grid-template-columns: 1fr; }
+      .mock-tile-c:nth-child(1), .mock-tile-c:nth-child(3) { aspect-ratio: 2/1; grid-column: 1; }
+      .choose-bar { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── HEADER ─────────────────────────────────────────────────── -->
+  <header class="picker-header">
+    <div class="wordmark">Lindmill Designs</div>
+    <h1>Choose your <span>visual direction</span></h1>
+    <p>Three distinct design concepts for the site revamp. Each keeps the pink + lime palette but pushes the design language in a different direction. Pick the one that feels most like you — or name what you'd blend.</p>
+  </header>
+  <div class="instruction-bar">👇 Scroll through all three, then click "This is the one" on your favourite</div>
+
+  <div class="directions">
+
+    <!-- ── DIRECTION A ─────────────────────────────────────────── -->
+    <section class="direction dir-a">
+      <div class="dir-label">Direction A</div>
+      <div class="dir-a-inner">
+        <div class="dir-a-left">
+          <div class="dir-tagline">Warm · Illustrated · Storybook</div>
+          <div class="dir-name">Warm<br>Storybook</div>
+          <p class="dir-desc">Warm cream backgrounds, rounded type, playful rounded tiles. Feels like a beloved picture book made by a working designer. Warm, approachable, human — and unmistakably Linda's.</p>
+          <div class="palette-row">
+            <div class="swatch" style="background:#FAF7F0;" title="Cream"></div>
+            <div class="swatch" style="background:#06102e;" title="Navy"></div>
+            <div class="swatch" style="background:#d9ff76;" title="Lime"></div>
+            <div class="swatch" style="background:#fe2786;" title="Pink"></div>
+            <div class="swatch" style="background:#FFD6E0;" title="Rose"></div>
+            <div class="swatch" style="background:#F5E6CC;" title="Sand"></div>
+            <span class="swatch-label">Warm cream · dusty pastels · warm off-white</span>
+          </div>
+          <div class="type-sample">
+            <div class="ts-display">Lindmill<br>Designs</div>
+            <div class="ts-sub">Motion · Illustration · Brand</div>
+            <div class="ts-body">DM Serif Display — Narnia stays as hero · Nunito for body text. Two families only.</div>
+          </div>
+        </div>
+        <div class="dir-a-right">
+          <div class="mock-grid-a">
+            <div class="mock-tile-a"><div class="mt-bg">🌸</div><div class="mt-label">Blooming Flowers</div></div>
+            <div class="mock-tile-a"><div class="mt-bg">🐾</div><div class="mt-label">Rogz Characters</div></div>
+            <div class="mock-tile-a"><div class="mt-bg">🌙</div><div class="mt-label">Pink Moon</div></div>
+            <div class="mock-tile-a"><div class="mt-bg">🐟</div><div class="mt-label">Something Fishy</div></div>
+            <div class="mock-tile-a"><div class="mt-bg">⭐</div><div class="mt-label">Star</div></div>
+            <div class="mock-tile-a"><div class="mt-bg">🎨</div><div class="mt-label">Logo Design</div></div>
+          </div>
+          <p class="mock-note">↑ Hover tiles — rounded corners, warm pastel fills, gentle lift</p>
+        </div>
+      </div>
+      <div class="choose-bar">
+        <p class="choose-text"><strong>Best for:</strong> visitors who should feel warmth and trust the moment they land. Accessible, cosy, portfolio-as-journal.</p>
+        <button class="btn-choose" onclick="choose('Warm Storybook — Direction A')">This is the one ✓</button>
+      </div>
+    </section>
+
+    <div class="dir-divider">or</div>
+
+    <!-- ── DIRECTION B ─────────────────────────────────────────── -->
+    <section class="direction dir-b">
+      <div class="dir-label">Direction B</div>
+      <div class="dir-b-inner">
+        <div class="dir-b-left">
+          <div class="dir-tagline" style="font-family:'Inter',sans-serif;">Bold · Kinetic · Cut-Out</div>
+          <div class="dir-name">Kinetic<br><span>Cut-Outs</span></div>
+          <p class="dir-desc">Near-black canvas, electric lime and hot pink as pure signal, clipped tile shapes, Bebas Neue headlines. Looks like a motion design studio — sharp, confident, industry-grade.</p>
+          <div class="palette-row">
+            <div class="swatch" style="background:#0a0a0a;" title="Near-black"></div>
+            <div class="swatch" style="background:#1a1a1a;" title="Dark grey"></div>
+            <div class="swatch" style="background:#c8ff3e;" title="Electric lime"></div>
+            <div class="swatch" style="background:#ff2d78;" title="Hot pink"></div>
+            <div class="swatch" style="background:#f8f8f4;" title="Paper white"></div>
+            <span class="swatch-label" style="color:rgba(255,255,255,0.4);">Near-black · electric lime · hot pink · paper white</span>
+          </div>
+          <div class="type-sample-b">
+            <div class="ts-display">LINDMILL<br>DESIGNS</div>
+            <div class="ts-sub">Motion · Illustration · Brand</div>
+            <div class="ts-body" style="font-family:'Inter',sans-serif;">Bebas Neue for all display — Inter for body. Two families only. No mixing.</div>
+          </div>
+        </div>
+        <div class="dir-b-right">
+          <div class="mock-grid-b">
+            <div class="mock-tile-b"><div class="mt-bg">🌸</div><div class="mt-label">Blooming Flowers</div></div>
+            <div class="mock-tile-b"><div class="mt-bg" style="color:#0a0a0a;">🐾</div><div class="mt-label" style="color:#0a0a0a;background:rgba(200,255,62,0.9);">Rogz Characters</div></div>
+            <div class="mock-tile-b"><div class="mt-bg" style="color:#fff;">🌙</div><div class="mt-label">Pink Moon</div></div>
+            <div class="mock-tile-b"><div class="mt-bg">🐟</div><div class="mt-label">Something Fishy</div></div>
+            <div class="mock-tile-b"><div class="mt-bg">⭐</div><div class="mt-label">Star</div></div>
+            <div class="mock-tile-b"><div class="mt-bg" style="color:#fff;">🎨</div><div class="mt-label">Logo Design</div></div>
+          </div>
+          <p class="mock-note" style="color:rgba(255,255,255,0.25);">↑ Hover tiles — clipped corners, bold labels, high contrast</p>
+        </div>
+      </div>
+      <div class="choose-bar">
+        <p class="choose-text"><strong>Best for:</strong> positioning Linda alongside studio-level motion designers. Commands attention, signals professional confidence.</p>
+        <button class="btn-choose" onclick="choose('Kinetic Cut-Outs — Direction B')">This is the one ✓</button>
+      </div>
+    </section>
+
+    <div class="dir-divider">or</div>
+
+    <!-- ── DIRECTION C ─────────────────────────────────────────── -->
+    <section class="direction dir-c">
+      <div class="dir-label">Direction C</div>
+      <div class="dir-c-inner">
+        <div class="dir-c-left">
+          <div class="dir-tagline" style="font-family:'Plus Jakarta Sans',sans-serif;">Curated · Pattern-Forward · Archive</div>
+          <div class="dir-name">Pattern<br><span>Archive</span></div>
+          <p class="dir-desc">Warm cream base, Syne geometric headlines, asymmetric masonry grid, teal as a third accent. Leans into the collection/archive aesthetic — like walking through a well-organised studio. Every project feels like a curated chapter.</p>
+          <div class="palette-row">
+            <div class="swatch" style="background:#FFF8EF;" title="Cream"></div>
+            <div class="swatch" style="background:#06102e;" title="Navy"></div>
+            <div class="swatch" style="background:#d9ff76;" title="Lime"></div>
+            <div class="swatch" style="background:#fe2786;" title="Pink"></div>
+            <div class="swatch" style="background:#2dd4bf;" title="Teal"></div>
+            <span class="swatch-label">Warm cream · pink + lime + teal triple accent</span>
+          </div>
+          <div class="type-sample-c">
+            <div class="ts-display">Lindmill<br>Designs</div>
+            <div class="ts-sub" style="font-family:'Plus Jakarta Sans',sans-serif;">Motion · Illustration · Brand</div>
+            <div class="ts-body" style="font-family:'Plus Jakarta Sans',sans-serif;">Syne for all display — Plus Jakarta Sans for body. Geometric + humanist pairing.</div>
+          </div>
+        </div>
+        <div class="dir-c-right">
+          <div class="filter-pills-c">
+            <div class="pill-c active">All</div>
+            <div class="pill-c">Animation</div>
+            <div class="pill-c">Illustration</div>
+            <div class="pill-c">Branding</div>
+          </div>
+          <div class="mock-grid-c">
+            <div class="mock-tile-c"><div class="mt-bg">🌸</div><div class="mt-label">Blooming Flowers</div></div>
+            <div class="mock-tile-c"><div class="mt-bg">🐾</div><div class="mt-label">Rogz Characters</div></div>
+            <div class="mock-tile-c"><div class="mt-bg">🐟</div><div class="mt-label">Something Fishy</div></div>
+          </div>
+          <p class="mock-note" style="color:rgba(255,255,255,0.3);">↑ Asymmetric grid — tiles breathe at different sizes. Hover lifts them.</p>
+        </div>
+      </div>
+      <div class="choose-bar">
+        <p class="choose-text"><strong>Best for:</strong> positioning Linda as a disciplined design thinker with a deep body of work — suits brand identity clients who want to see systems thinking.</p>
+        <button class="btn-choose" onclick="choose('Pattern Archive — Direction C')">This is the one ✓</button>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ── FOOTER ──────────────────────────────────────────────────── -->
+  <footer class="picker-footer">
+    <p><strong>Can't decide?</strong> Reply with a blend — e.g. <em>"B's boldness, A's warmth"</em> and the design team will composite a fourth pass.</p>
+    <p style="margin-top:12px;">Questions → <a href="mailto:thelindamiller@gmail.com">thelindamiller@gmail.com</a> · Angus: angusm99@gmail.com</p>
+    <p style="margin-top:20px;font-size:0.75rem;color:rgba(255,255,255,0.25);">Lindmill Designs — Visual Direction Concepts · 2026</p>
+  </footer>
+
+  <!-- ── CHOSEN OVERLAY ──────────────────────────────────────────── -->
+  <div class="chosen-overlay" id="chosenOverlay">
+    <div class="chosen-direction" id="chosenLabel"></div>
+    <h2>You chose <span id="chosenShort"></span></h2>
+    <p>Brilliant choice. Share this page (or just tell Angus your pick) and the detailed mocks + implementation will follow — tailored to this direction.</p>
+    <div class="next-steps">
+      <h3>What happens next</h3>
+      <ul>
+        <li>Angus shares your choice with the design team</li>
+        <li>Detailed mocks: every page at desktop + mobile</li>
+        <li>Design tokens + motion spec delivered</li>
+        <li>CSS patch applied to the live site</li>
+      </ul>
+    </div>
+    <button class="btn-reset" onclick="reset()">← Go back and reconsider</button>
+  </div>
+
+  <script>
+    function choose(direction) {
+      const overlay = document.getElementById('chosenOverlay');
+      document.getElementById('chosenLabel').textContent = direction;
+      const shortName = direction.split(' — ')[0];
+      document.getElementById('chosenShort').textContent = shortName;
+      overlay.classList.add('show');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    function reset() {
+      document.getElementById('chosenOverlay').classList.remove('show');
+    }
+    // Filter pills interaction for Direction C demo
+    document.querySelectorAll('.pill-c').forEach(pill => {
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('.pill-c').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
