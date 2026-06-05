@@ -54,7 +54,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Nunito:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Fredoka:wght@700&family=Nunito:wght@400;600;800;900&family=Nunito+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     /* ---- Custom font faces ---- */
@@ -87,17 +87,79 @@
       --ink:   #0e1729;
       --white: #ffffff;
       --fish:  #0a1540;
+
+      /* Refined design system tokens (Kinetic Cut-Outs direction) */
+      /* Core surfaces */
+      --lm-navy: oklch(16% 0.065 269);
+      --lm-navy-2: oklch(23% 0.102 271);
+      --lm-ink: oklch(28% 0.075 260);
+      --lm-muted: oklch(54% 0.045 260);
+      --lm-paper: oklch(98% 0.018 102);
+      --lm-surface: oklch(100% 0 0);
+      --lm-border: oklch(84% 0.03 260);
+
+      /* Brand accents */
+      --lm-lime: oklch(94% 0.164 123);
+      --lm-pink: oklch(67% 0.255 356);
+      --lm-aqua: oklch(78% 0.12 190);
+      --lm-butter: oklch(94% 0.07 88);
+
+      /* Status */
+      --lm-success: oklch(65% 0.15 148);
+      --lm-warning: oklch(78% 0.15 74);
+      --lm-danger: oklch(62% 0.21 25);
+
+      /* Type */
+      --lm-font-display: "Baloo 2", "Barlow", "Fredoka", "Arial Rounded MT Bold", system-ui, sans-serif;
+      --lm-font-body: "Nunito Sans", "Nunito", "Arial Rounded MT Bold", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --lm-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+      /* Type scale */
+      --lm-step--1: clamp(0.82rem, 0.76rem + 0.2vw, 0.92rem);
+      --lm-step-0: clamp(1rem, 0.96rem + 0.22vw, 1.12rem);
+      --lm-step-1: clamp(1.18rem, 1.08rem + 0.46vw, 1.42rem);
+      --lm-step-2: clamp(1.55rem, 1.32rem + 1vw, 2.1rem);
+      --lm-step-3: clamp(2.3rem, 1.7rem + 2.8vw, 4.1rem);
+      --lm-step-4: clamp(3.4rem, 2.3rem + 5vw, 7.8rem);
+
+      /* Spacing */
+      --lm-space-1: 4px;
+      --lm-space-2: 8px;
+      --lm-space-3: 12px;
+      --lm-space-4: 16px;
+      --lm-space-5: 24px;
+      --lm-space-6: 36px;
+      --lm-space-7: 56px;
+      --lm-space-8: 80px;
+
+      /* Shape and depth */
+      --lm-radius-sm: 10px;
+      --lm-radius-md: 18px;
+      --lm-radius-lg: 28px;
+      --lm-radius-xl: 34px;
+      --lm-shadow-hard: 10px 10px 0 var(--lm-navy);
+      --lm-shadow-pink: 10px 10px 0 var(--lm-pink);
+      --lm-shadow-lime: 10px 10px 0 var(--lm-lime);
+      --lm-shadow-soft: 0 24px 80px oklch(16% 0.065 269 / 0.22);
+
+      /* Motion */
+      --lm-dur-fast: 160ms;
+      --lm-dur-med: 260ms;
+      --lm-dur-slow: 420ms;
+      --lm-ease-cut: cubic-bezier(.2,.8,.2,1);
+      --lm-ease-pop: cubic-bezier(.18,.9,.22,1.18);
     }
 
     /* Accessibility: visible focus ring only for keyboard users */
     :focus { outline: none; }
     body.using-keyboard *:focus-visible {
-      outline: 3px solid var(--pink);
-      outline-offset: 3px;
-      border-radius: 3px;
+      outline: 3px solid var(--lm-pink);
+      outline-offset: 4px;
+      border-radius: var(--lm-radius-sm);
     }
     body.using-keyboard .project-tile:focus-visible {
-      outline-offset: 4px;
+      outline-offset: 6px;
+      outline-width: 4px;
     }
 
     /* Skip-to-content link (visible only when focused) */
@@ -105,24 +167,28 @@
       position: absolute;
       top: -100px;
       left: 0;
-      background: var(--lime);
-      color: var(--navy);
-      padding: 0.6rem 1rem;
-      font-family: 'Fredoka', sans-serif;
+      background: var(--lm-lime);
+      color: var(--lm-navy);
+      padding: var(--lm-space-3) var(--lm-space-4);
+      font-family: var(--lm-font-display);
       font-weight: 700;
       text-decoration: none;
       z-index: 9999;
-      border-radius: 0 0 4px 0;
+      border-radius: 0 0 var(--lm-radius-sm) 0;
+      border: 2px solid var(--lm-navy);
+      box-shadow: var(--lm-shadow-hard);
     }
     .skip-link:focus { top: 0; }
 
     html { font-size: 16px; }
 
     body {
-      font-family: 'Nunito', sans-serif;
-      background: var(--navy);
-      color: var(--ink);
+      font-family: var(--lm-font-body);
+      background: var(--lm-navy);
+      color: var(--lm-ink);
       overflow-x: hidden;
+      font-size: var(--lm-step-0);
+      line-height: 1.5;
     }
 
     /* ================================================
@@ -142,44 +208,54 @@
     .btn-lime {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 10px 22px;
-      border: 2px solid var(--lime);
-      color: var(--lime);
-      background: transparent;
-      font-family: 'Fredoka', sans-serif;
-      font-size: 1rem;
+      gap: var(--lm-space-2);
+      padding: var(--lm-space-3) var(--lm-space-5);
+      border: 2px solid var(--lm-navy);
+      color: var(--lm-navy);
+      background: var(--lm-lime);
+      font-family: var(--lm-font-display);
+      font-size: var(--lm-step-0);
       font-weight: 700;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
       text-decoration: none;
-      border-radius: 6px;
+      border-radius: 999px;
       cursor: pointer;
-      transition: background 0.2s, color 0.2s;
+      transition: transform var(--lm-dur-fast) var(--lm-ease-cut),
+                  box-shadow var(--lm-dur-fast) var(--lm-ease-cut);
       line-height: 1;
+      box-shadow: var(--lm-shadow-hard);
     }
-    .btn-lime:hover { background: var(--lime); color: var(--navy); }
+    .btn-lime:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--lm-shadow-pink);
+    }
 
     .btn-pink {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 10px 22px;
-      background: var(--pink);
-      color: var(--white);
-      border: 2px solid var(--pink);
-      font-family: 'Fredoka', sans-serif;
-      font-size: 1rem;
+      gap: var(--lm-space-2);
+      padding: var(--lm-space-3) var(--lm-space-5);
+      background: var(--lm-pink);
+      color: var(--lm-surface);
+      border: 2px solid var(--lm-navy);
+      font-family: var(--lm-font-display);
+      font-size: var(--lm-step-0);
       font-weight: 700;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
       text-decoration: none;
-      border-radius: 6px;
+      border-radius: 999px;
       cursor: pointer;
-      transition: background 0.2s, border-color 0.2s;
+      transition: transform var(--lm-dur-fast) var(--lm-ease-cut),
+                  box-shadow var(--lm-dur-fast) var(--lm-ease-cut);
       line-height: 1;
+      box-shadow: var(--lm-shadow-hard);
     }
-    .btn-pink:hover { background: #d4277e; border-color: #d4277e; }
+    .btn-pink:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--lm-shadow-lime);
+    }
 
     /* ================================================
        PAGE HEADER (shared by Work + About)
@@ -1279,6 +1355,135 @@
       border-radius: 100px;
     }
 
+    /* ================================================
+       UPDATE 3 OVERRIDES (hard fork) — appended last
+    ================================================ */
+
+    /* Home: Contact + See My Work buttons grow on hover (keep centering) */
+    .home-btn-contact:hover,
+    .home-btn-work:hover { transform: translateX(-50%) scale(1.12); }
+
+    /* Shared 3-column header for Contact + Work → Work/Contact | Logo | Resume */
+    #about .site-header,
+    #work  .site-header {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+    }
+    #about .site-header .header-nav-left,
+    #work  .site-header .header-nav-left  { justify-self: start; }
+    #about .site-header .header-logo,
+    #work  .site-header .header-logo      { justify-self: center; }
+    #about .site-header .header-nav-right,
+    #work  .site-header .header-nav-right { justify-self: end; }
+
+    /* Work page: centre ALL WORK heading + intro + filters */
+    #work .work-heading,
+    #work .work-intro {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #work .filter-bar { justify-content: center; }
+
+    /* Contact page: tidy spacing now that the logo badge is gone */
+    #about .about-hello { margin-top: 0.5rem; }
+
+    /* Resume: Freelance Designer + In-House Designer → pink */
+    .resume-item-title { color: #fe2786 !important; }
+
+    /* ---- PROJECT MODAL → white carousel ---- */
+    .modal-card           { background: #ffffff !important; }
+    .modal-text-section   { color: #143465 !important; }
+    .modal-title          { color: #06102e !important; }
+    .modal-desc           { color: #555 !important; }
+    .modal-role           { color: #fe2786 !important; }
+    .modal-close          { background: #fe2786; color: #fff; }
+    .modal-close:hover    { background: #d11d6e; }
+    .modal-gallery-section { background: #ffffff !important; padding: 0 0 0.4rem !important; }
+
+    .carousel {
+      position: relative;
+      flex: 1;
+      min-height: 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
+    .carousel-track {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .carousel-track::-webkit-scrollbar { display: none; }
+    .carousel-track img {
+      flex: 0 0 100%;
+      width: 100%;
+      height: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      scroll-snap-align: center;
+      cursor: zoom-in;
+      padding: 0 1.25rem;
+    }
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 5;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(254,39,134,0.92);
+      color: #fff;
+      font-size: 1.9rem;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+      transition: transform 0.15s ease, background 0.2s ease;
+    }
+    .carousel-arrow:hover { background: #fe2786; transform: translateY(-50%) scale(1.1); }
+    .carousel-prev { left: 14px; }
+    .carousel-next { right: 14px; }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 14px 1rem 6px;
+      flex-shrink: 0;
+    }
+    .carousel-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(6,16,46,0.22);
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .carousel-dot:hover  { background: rgba(6,16,46,0.45); }
+    .carousel-dot.active { background: #fe2786; transform: scale(1.25); }
+
+    @media (max-width: 700px) {
+      .carousel-arrow { width: 38px; height: 38px; font-size: 1.5rem; }
+      .carousel-prev { left: 6px; }
+      .carousel-next { right: 6px; }
+      .carousel-track img { padding: 0 0.5rem; }
+    }
+
   </style>
 </head>
 <body>
@@ -1418,15 +1623,17 @@
   <section class="page" id="work" aria-label="Portfolio">
     <a id="main-content"></a>
 
+    <!-- Header: Contact | Logo | Resume (matches Contact page — Update 3) -->
     <header class="site-header">
-      <!-- Header logo — clickable, Work page only (Task 2) -->
+      <nav class="header-nav header-nav-left">
+        <button class="header-nav-link" onclick="showPage('about')">Contact</button>
+      </nav>
       <a class="header-logo" onclick="showPage('home')" title="Go to Home" href="javascript:void(0)" aria-label="Home">
         <img src="images/updated-logo.gif" alt="Lindmill Designs"
              onerror="this.style.display='none';">
       </a>
-      <nav class="header-nav">
-        <!-- HOME button removed per Task 3 — logo serves as home link -->
-        <button class="btn-pink" style="padding:7px 16px; font-size:0.85rem;" onclick="showPage('about')">Contact</button>
+      <nav class="header-nav header-nav-right">
+        <button class="header-nav-link" onclick="showPage('resume')">Resume</button>
       </nav>
     </header>
 
@@ -1434,7 +1641,6 @@
 
       <h1 class="work-heading">ALL WORK</h1>
       <p class="work-intro">Brand-focused motion designer and illustrator — specialising in branding, visual storytelling, and bringing ideas to life through design and motion.</p>
-      <p class="work-hint">*Select a project to view the full gallery.</p>
 
       <!-- Category filter pills — 4 categories, no borders (Task 4) -->
       <div class="filter-bar">
@@ -1634,9 +1840,8 @@
       </div>
     </div>
 
-    <!-- Work footer — divider + GET IN TOUCH + socials (Task 5) -->
+    <!-- Work footer — socials only, matches Contact (Update 3) -->
     <div class="work-footer">
-      <button class="btn-pink" onclick="showPage('about')" style="letter-spacing:0.12em;">GET IN TOUCH</button>
       <div class="work-footer-socials">
         <a href="https://www.instagram.com/thelindamiller" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1664,25 +1869,21 @@
   ============================================================ -->
   <section class="page" id="about">
 
+    <!-- Header: Work | Logo | Resume (centered logo — Update 3) -->
     <header class="site-header">
-      <!-- Header logo — clickable, Contact page only (Task 2) -->
+      <nav class="header-nav header-nav-left">
+        <button class="header-nav-link" onclick="showPage('work')">Work</button>
+      </nav>
       <a class="header-logo" onclick="showPage('home')" title="Go to Home" href="javascript:void(0)" aria-label="Home">
         <img src="images/updated-logo.gif" alt="Lindmill Designs"
              onerror="this.style.display='none';">
       </a>
-      <nav class="header-nav">
-        <button class="header-nav-link" onclick="showPage('work')">Work</button>
+      <nav class="header-nav header-nav-right">
+        <button class="header-nav-link" onclick="showPage('resume')">Resume</button>
       </nav>
     </header>
 
     <div class="about-body">
-
-      <!-- Logo badge -->
-      <div class="about-badge">
-        <img src="images/updated-logo.gif" alt="Lindmill Designs"
-             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-        <div class="about-badge-text" style="display:none;">LINDMILL<br>DESIGNS</div>
-      </div>
 
       <h2 class="about-hello">HELLO!</h2>
 
@@ -1716,44 +1917,10 @@
         </div>
       </div>
 
-      <!-- Social icons -->
-      <div class="social-bar">
-        <a href="https://www.instagram.com/thelindamiller" target="_blank" rel="noopener" title="Instagram">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-            <circle cx="12" cy="12" r="4"/>
-            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
-          </svg>
-        </a>
-        <a href="https://www.linkedin.com/in/thelindamiller" target="_blank" rel="noopener" title="LinkedIn">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-            <rect x="2" y="9" width="4" height="12"/>
-            <circle cx="4" cy="4" r="2"/>
-          </svg>
-        </a>
-        <a href="mailto:thelindamiller@gmail.com" title="Email">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-            <polyline points="22,6 12,13 2,6"/>
-          </svg>
-        </a>
-        <a href="https://www.behance.net/" target="_blank" rel="noopener" title="Behance">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M2 6h7a4 4 0 0 1 0 8H2z"/>
-            <path d="M2 14h9a4 4 0 0 1 0 8H2z"/>
-            <line x1="14" y1="7" x2="22" y2="7"/>
-            <path d="M14 11c0-3.3 2.7-5 5.5-5S25 7.7 25 11"/>
-            <line x1="14" y1="16" x2="22" y2="16"/>
-          </svg>
-        </a>
-      </div>
-
     </div>
 
-    <!-- Contact page footer — work-style with RESUME button (Update 2) -->
+    <!-- Contact page footer — socials only (Update 3) -->
     <div class="work-footer">
-      <button class="btn-pink" onclick="showPage('resume')" style="letter-spacing:0.12em;">RESUME</button>
       <div class="work-footer-socials">
         <a href="https://www.instagram.com/thelindamiller" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1901,10 +2068,14 @@
         <p  class="modal-role"  id="modalRole"></p>
       </div>
 
-      <!-- B. Horizontal snap-scroll gallery -->
+      <!-- B. Carousel — one slide at a time, arrows + dots (Update 3) -->
       <div class="modal-gallery-section">
-        <div class="gallery-scroll" id="modalGrid"></div>
-        <div class="gallery-counter" id="galleryCounter" aria-live="polite"></div>
+        <div class="carousel">
+          <button class="carousel-arrow carousel-prev" type="button" onclick="carouselStep(-1)" aria-label="Previous image">&#8249;</button>
+          <div class="carousel-track" id="modalGrid"></div>
+          <button class="carousel-arrow carousel-next" type="button" onclick="carouselStep(1)" aria-label="Next image">&#8250;</button>
+        </div>
+        <div class="carousel-dots" id="carouselDots" aria-label="Gallery navigation"></div>
       </div>
     </div>
   </div>
@@ -2022,7 +2193,7 @@
       // Show loading state in gallery
       const gallery = document.getElementById('modalGrid');
       gallery.innerHTML = '<div class="gallery-loading">Loading gallery…</div>';
-      document.getElementById('galleryCounter').textContent = '';
+      document.getElementById('carouselDots').innerHTML = '';
 
       const overlay = document.getElementById('modalOverlay');
       overlay.classList.add('open');
@@ -2039,10 +2210,14 @@
 
       Promise.all(probes).then(results => {
         const found = results.filter(Boolean);
-        gallery.innerHTML = '';
+        const track = gallery;       // #modalGrid (carousel-track)
+        track.innerHTML = '';
+        const dots = document.getElementById('carouselDots');
+        dots.innerHTML = '';
 
-        // If no gallery images, use thumbnail as single image
+        // If no gallery images, use thumbnail as single slide
         const images = found.length > 0 ? found : [p.thumb];
+        _carouselImages = images;
 
         images.forEach((src, idx) => {
           const img = document.createElement('img');
@@ -2051,26 +2226,51 @@
           img.loading = 'lazy';
           img.decoding = 'async';
           img.addEventListener('click', () => openLightbox(images, idx));
-          gallery.appendChild(img);
+          track.appendChild(img);
         });
 
-        // Counter
-        const counter = document.getElementById('galleryCounter');
+        // Arrows + dots only when more than one image
+        const prev = document.querySelector('.carousel-prev');
+        const next = document.querySelector('.carousel-next');
         if (images.length > 1) {
-          counter.textContent = `1 / ${images.length}`;
-          // Update counter on scroll
-          gallery.addEventListener('scroll', () => {
-            const scrollLeft = gallery.scrollLeft;
-            const firstImg = gallery.querySelector('img');
-            if (!firstImg) return;
-            const imgWidth = firstImg.offsetWidth + 12; // gap
-            const idx = Math.round(scrollLeft / imgWidth);
-            counter.textContent = `${Math.min(idx + 1, images.length)} / ${images.length}`;
-          }, { passive: true });
+          if (prev) prev.style.display = '';
+          if (next) next.style.display = '';
+          images.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.type = 'button';
+            dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+            dot.setAttribute('aria-label', `Go to image ${i + 1}`);
+            dot.addEventListener('click', () => carouselGoTo(i));
+            dots.appendChild(dot);
+          });
+          track.onscroll = _updateCarouselDots;
         } else {
-          counter.textContent = '';
+          if (prev) prev.style.display = 'none';
+          if (next) next.style.display = 'none';
+          track.onscroll = null;
         }
+        track.scrollLeft = 0;
       });
+    }
+
+    /* ---- CAROUSEL CONTROLS (Update 3) ---- */
+    let _carouselImages = [];
+    function carouselStep(dir) {
+      const track = document.getElementById('modalGrid');
+      if (!track) return;
+      track.scrollBy({ left: dir * track.clientWidth, behavior: 'smooth' });
+    }
+    function carouselGoTo(i) {
+      const track = document.getElementById('modalGrid');
+      if (!track) return;
+      track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+    }
+    function _updateCarouselDots() {
+      const track = document.getElementById('modalGrid');
+      if (!track) return;
+      const idx = Math.round(track.scrollLeft / track.clientWidth);
+      document.querySelectorAll('#carouselDots .carousel-dot')
+        .forEach((d, i) => d.classList.toggle('active', i === idx));
     }
 
     /* Probe one filename across extensions; resolve with the first that loads, or null */
