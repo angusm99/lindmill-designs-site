@@ -1422,16 +1422,17 @@
       scrollbar-width: none;
     }
     .carousel-track::-webkit-scrollbar { display: none; }
-    .carousel-track img {
+    .carousel-track img,
+    .carousel-track video {
       flex: 0 0 100%;
       width: 100%;
       height: 100%;
       max-height: 100%;
       object-fit: contain;
       scroll-snap-align: center;
-      cursor: zoom-in;
       padding: 0 1.25rem;
     }
+    .carousel-track img { cursor: zoom-in; }
     .carousel-arrow {
       position: absolute;
       top: 50%;
@@ -1481,7 +1482,8 @@
       .carousel-arrow { width: 38px; height: 38px; font-size: 1.5rem; }
       .carousel-prev { left: 6px; }
       .carousel-next { right: 6px; }
-      .carousel-track img { padding: 0 0.5rem; }
+      .carousel-track img,
+      .carousel-track video { padding: 0 0.5rem; }
     }
 
   </style>
@@ -2144,11 +2146,11 @@
     /* ---- PROJECT DATA — matches Linda's 12 ALL WORK thumbnails ---- */
     const PROJECTS = {
       /* ── ANIMATION (6) ──────────────────────────────────────────── */
-      'blooming-flowers':    { title:'Blooming Flowers',          role:'Motion Designer',                    desc:'A lush, illustrated animation series — flowers in full bloom brought to life through frame-by-frame motion.',                              folder:'images/blooming-flowers',    thumb:'images/blooming-flowers/01.jpg', maxCount:10 },
+      'blooming-flowers':    { title:'Blooming Flowers',          role:'Motion Designer',                    desc:'A lush, illustrated animation series — flowers in full bloom brought to life through frame-by-frame motion.',                              folder:'images/blooming-flowers',    thumb:'images/blooming-flowers/01.jpg', maxCount:10, videos:['images/blooming-flowers/v1.mp4','images/blooming-flowers/v2.mp4'] },
       'dorothy':             { title:'Dorothy GIFs',              role:'Motion Designer',                    desc:'A series of animated GIFs following Dorothy — narrative motion work with character and charm.',                                           folder:'images/dorothy',             thumb:'images/dorothy/01.gif',          maxCount:10 },
       'new-year':            { title:'New Year',                  role:'Motion Designer',                    desc:'New Year campaign artwork and motion work — bold, celebratory illustration in motion.',                                                   folder:'images/new-year',            thumb:'images/new-year/01.jpg',         maxCount:10 },
       'rogz-animated':       { title:'Rogz Motion',               role:'Motion Designer',                    desc:'Animated GIF campaign content for Rogz Pet Gear — playful social motion across holidays and events.',                                    folder:'images/rogz-animated',       thumb:'images/rogz-animated/01.gif',    maxCount:15 },
-      'star':                { title:'Star',                      role:'Motion Designer',                    desc:'A motion piece exploring colour — seven distinct palette executions of the same animated composition.',                                    folder:'images/star',                thumb:'images/star/07.jpg',             maxCount:10 },
+      'star':                { title:'Star',                      role:'Motion Designer',                    desc:'A motion piece exploring colour — seven distinct palette executions of the same animated composition.',                                    folder:'images/star',                thumb:'images/star/07.jpg',             maxCount:10, skipImages:true, videos:['images/star/v1.mp4','images/star/v2.mp4','images/star/v3.mp4','images/star/v4.mp4','images/star/v5.mp4','images/star/v6.mp4','images/star/v7.mp4'] },
       'throwball':           { title:'Throwball',                 role:'Illustrator & Motion Designer',      desc:'Original character and concept design for Throwball — from sketch to frame-by-frame animation.',                                          folder:'images/throwball',           thumb:'images/throwball/01.jpg',        maxCount:15 },
 
       /* ── ILLUSTRATION (7) ───────────────────────────────────────── */
@@ -2215,31 +2217,48 @@
         const dots = document.getElementById('carouselDots');
         dots.innerHTML = '';
 
-        // If no gallery images, use thumbnail as single slide
-        const images = found.length > 0 ? found : [p.thumb];
-        _carouselImages = images;
+        // Build slide list: videos first, then images (unless project skips images)
+        const vids = (p.videos || []).map(src => ({ type: 'video', src }));
+        const imgs = (p.skipImages ? [] : found).map(src => ({ type: 'image', src }));
+        let slides = [...vids, ...imgs];
+        if (slides.length === 0) slides = [{ type: 'image', src: p.thumb }];
 
-        images.forEach((src, idx) => {
-          const img = document.createElement('img');
-          img.src = src;
-          img.alt = `${p.title} — image ${idx + 1}`;
-          img.loading = 'lazy';
-          img.decoding = 'async';
-          img.addEventListener('click', () => openLightbox(images, idx));
-          track.appendChild(img);
+        // Image-only URL list for the lightbox (videos excluded)
+        const imageUrls = slides.filter(s => s.type === 'image').map(s => s.src);
+
+        slides.forEach((slide, idx) => {
+          if (slide.type === 'video') {
+            const v = document.createElement('video');
+            v.src = slide.src;
+            v.loop = true; v.muted = true; v.playsInline = true;
+            v.setAttribute('playsinline', ''); v.setAttribute('muted', '');
+            v.preload = (idx === 0) ? 'auto' : 'metadata';
+            if (idx === 0) v.autoplay = true;
+            v.setAttribute('aria-label', `${p.title} — animation ${idx + 1}`);
+            track.appendChild(v);
+          } else {
+            const img = document.createElement('img');
+            img.src = slide.src;
+            img.alt = `${p.title} — image ${idx + 1}`;
+            img.loading = 'lazy';
+            img.decoding = 'async';
+            const li = imageUrls.indexOf(slide.src);
+            img.addEventListener('click', () => openLightbox(imageUrls, li));
+            track.appendChild(img);
+          }
         });
 
-        // Arrows + dots only when more than one image
+        // Arrows + dots only when more than one slide
         const prev = document.querySelector('.carousel-prev');
         const next = document.querySelector('.carousel-next');
-        if (images.length > 1) {
+        if (slides.length > 1) {
           if (prev) prev.style.display = '';
           if (next) next.style.display = '';
-          images.forEach((_, i) => {
+          slides.forEach((s, i) => {
             const dot = document.createElement('button');
             dot.type = 'button';
             dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-            dot.setAttribute('aria-label', `Go to image ${i + 1}`);
+            dot.setAttribute('aria-label', `Go to ${s.type} ${i + 1}`);
             dot.addEventListener('click', () => carouselGoTo(i));
             dots.appendChild(dot);
           });
@@ -2250,6 +2269,7 @@
           track.onscroll = null;
         }
         track.scrollLeft = 0;
+        _syncCarouselVideos(0);   // play first slide if it's a video
       });
     }
 
@@ -2271,6 +2291,18 @@
       const idx = Math.round(track.scrollLeft / track.clientWidth);
       document.querySelectorAll('#carouselDots .carousel-dot')
         .forEach((d, i) => d.classList.toggle('active', i === idx));
+      _syncCarouselVideos(idx);
+    }
+    /* Play the active slide's video, pause all others */
+    function _syncCarouselVideos(activeIdx) {
+      const track = document.getElementById('modalGrid');
+      if (!track) return;
+      Array.from(track.children).forEach((el, i) => {
+        if (el.tagName === 'VIDEO') {
+          if (i === activeIdx) { el.play().catch(() => {}); }
+          else { el.pause(); }
+        }
+      });
     }
 
     /* Probe one filename across extensions; resolve with the first that loads, or null */
@@ -2296,9 +2328,12 @@
       m.classList.remove('open');
       m.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
-      // Reset gallery scroll & counter
+      // Pause any playing videos, then reset gallery scroll
       const gallery = document.getElementById('modalGrid');
-      if (gallery) gallery.scrollLeft = 0;
+      if (gallery) {
+        gallery.querySelectorAll('video').forEach(v => { try { v.pause(); } catch(_){} });
+        gallery.scrollLeft = 0;
+      }
       if (_modalTrigger) { try { _modalTrigger.focus(); } catch(_){} _modalTrigger = null; }
     }
     // Close on backdrop click (overlay itself, not the card)
