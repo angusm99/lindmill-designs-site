@@ -1448,10 +1448,22 @@
       width: 100%;
       height: 100%;
       opacity: 0;
+      transform: scale(1);
       transition: opacity 1.1s ease;
       pointer-events: none;
+      will-change: opacity, transform;
     }
-    .carousel-track.crossfade .cf-show { opacity: 1; }
+    /* Ken Burns: the visible slide slowly pans/zooms */
+    .carousel-track.crossfade .cf-show { opacity: 1; animation: kb-in 6s ease-out both; }
+    .carousel-track.crossfade img:nth-child(even).cf-show,
+    .carousel-track.crossfade video:nth-child(even).cf-show { animation-name: kb-out; }
+    @keyframes kb-in  { from { transform: scale(1)     translate(0, 0); }
+                        to   { transform: scale(1.14)  translate(-1.5%, -1.2%); } }
+    @keyframes kb-out { from { transform: scale(1.14)  translate(1.5%, 1.2%); }
+                        to   { transform: scale(1)     translate(0, 0); } }
+    @media (prefers-reduced-motion: reduce) {
+      .carousel-track.crossfade .cf-show { animation: none; transform: none; }
+    }
     .carousel-arrow {
       position: absolute;
       top: 50%;
@@ -2170,7 +2182,7 @@
       'new-year':            { title:'New Year',                  role:'Motion Designer',                    desc:'New Year campaign artwork and motion work — bold, celebratory illustration in motion.',                                                   folder:'images/new-year',            thumb:'images/new-year/01.jpg',         maxCount:10, autoCrossfade:true },
       'rogz-animated':       { title:'Rogz Motion',               role:'Motion Designer',                    desc:'Animated GIF campaign content for Rogz Pet Gear — playful social motion across holidays and events.',                                    folder:'images/rogz-animated',       thumb:'images/rogz-animated/01.gif',    maxCount:15 },
       'star':                { title:'Star',                      role:'Motion Designer',                    desc:'A motion piece exploring colour — seven distinct palette executions of the same animated composition.',                                    folder:'images/star',                thumb:'images/star/07.jpg',             maxCount:10, skipImages:true, videos:['images/star/v1.mp4','images/star/v2.mp4','images/star/v3.mp4','images/star/v4.mp4','images/star/v5.mp4','images/star/v6.mp4','images/star/v7.mp4'] },
-      'throwball':           { title:'Throwball',                 role:'Illustrator & Motion Designer',      desc:'Original character and concept design for Throwball — from sketch to frame-by-frame animation.',                                          folder:'images/throwball',           thumb:'images/throwball/01.jpg',        maxCount:15 },
+      'throwball':           { title:'Throwball',                 role:'Illustrator & Motion Designer',      desc:'Original character and concept design for Throwball — from sketch to frame-by-frame animation.',                                          folder:'images/throwball',           thumb:'images/throwball/01.jpg',        maxCount:15, autoCrossfade:true },
 
       /* ── ILLUSTRATION (7) ───────────────────────────────────────── */
       'angus':               { title:'Angus',                     role:'Illustrator',                        desc:'Hand-drawn character illustration — original sketches and finished artwork.',                                                              folder:'images/drawn',               thumb:'images/drawn/01.jpg',            maxCount:10 },
@@ -2319,7 +2331,7 @@
       track.classList.add('crossfade');
       track.onscroll = null;
       Array.from(track.children).forEach((k, i) => k.classList.toggle('cf-show', i === 0));
-      _cfTimer = setInterval(() => crossfadeGoTo(_cfIndex + 1), 3500);
+      _cfTimer = setInterval(() => crossfadeGoTo(_cfIndex + 1), 5000);
     }
     function crossfadeGoTo(i) {
       const track = document.getElementById('modalGrid');
@@ -2335,7 +2347,7 @@
     function _restartCfTimer() {
       if (!_isCrossfade) return;
       clearInterval(_cfTimer);
-      _cfTimer = setInterval(() => crossfadeGoTo(_cfIndex + 1), 3500);
+      _cfTimer = setInterval(() => crossfadeGoTo(_cfIndex + 1), 5000);
     }
     function _updateCarouselDots() {
       const track = document.getElementById('modalGrid');
