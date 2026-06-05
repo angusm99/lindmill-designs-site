@@ -1433,6 +1433,25 @@
       padding: 0 1.25rem;
     }
     .carousel-track img { cursor: zoom-in; }
+
+    /* Auto cross-fade mode (still-only projects): stack slides, fade between */
+    .carousel-track.crossfade {
+      display: block;
+      position: relative;
+      overflow: hidden;
+      scroll-snap-type: none;
+    }
+    .carousel-track.crossfade img,
+    .carousel-track.crossfade video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 1.1s ease;
+      pointer-events: none;
+    }
+    .carousel-track.crossfade .cf-show { opacity: 1; }
     .carousel-arrow {
       position: absolute;
       top: 50%;
@@ -2148,7 +2167,7 @@
       /* ── ANIMATION (6) ──────────────────────────────────────────── */
       'blooming-flowers':    { title:'Blooming Flowers',          role:'Motion Designer',                    desc:'A lush, illustrated animation series — flowers in full bloom brought to life through frame-by-frame motion.',                              folder:'images/blooming-flowers',    thumb:'images/blooming-flowers/01.jpg', maxCount:10, videos:['images/blooming-flowers/v1.mp4','images/blooming-flowers/v2.mp4'] },
       'dorothy':             { title:'Dorothy GIFs',              role:'Motion Designer',                    desc:'A series of animated GIFs following Dorothy — narrative motion work with character and charm.',                                           folder:'images/dorothy',             thumb:'images/dorothy/01.gif',          maxCount:10 },
-      'new-year':            { title:'New Year',                  role:'Motion Designer',                    desc:'New Year campaign artwork and motion work — bold, celebratory illustration in motion.',                                                   folder:'images/new-year',            thumb:'images/new-year/01.jpg',         maxCount:10 },
+      'new-year':            { title:'New Year',                  role:'Motion Designer',                    desc:'New Year campaign artwork and motion work — bold, celebratory illustration in motion.',                                                   folder:'images/new-year',            thumb:'images/new-year/01.jpg',         maxCount:10, autoCrossfade:true },
       'rogz-animated':       { title:'Rogz Motion',               role:'Motion Designer',                    desc:'Animated GIF campaign content for Rogz Pet Gear — playful social motion across holidays and events.',                                    folder:'images/rogz-animated',       thumb:'images/rogz-animated/01.gif',    maxCount:15 },
       'star':                { title:'Star',                      role:'Motion Designer',                    desc:'A motion piece exploring colour — seven distinct palette executions of the same animated composition.',                                    folder:'images/star',                thumb:'images/star/07.jpg',             maxCount:10, skipImages:true, videos:['images/star/v1.mp4','images/star/v2.mp4','images/star/v3.mp4','images/star/v4.mp4','images/star/v5.mp4','images/star/v6.mp4','images/star/v7.mp4'] },
       'throwball':           { title:'Throwball',                 role:'Illustrator & Motion Designer',      desc:'Original character and concept design for Throwball — from sketch to frame-by-frame animation.',                                          folder:'images/throwball',           thumb:'images/throwball/01.jpg',        maxCount:15 },
@@ -2270,20 +2289,53 @@
         }
         track.scrollLeft = 0;
         _syncCarouselVideos(0);   // play first slide if it's a video
+        _setupCrossfade(p.autoCrossfade ? slides.length : 0);  // auto fade for still-only projects
       });
     }
 
     /* ---- CAROUSEL CONTROLS (Update 3) ---- */
     let _carouselImages = [];
+    let _cfTimer = null, _cfIndex = 0, _isCrossfade = false;   // auto cross-fade state
     function carouselStep(dir) {
+      if (_isCrossfade) { crossfadeGoTo(_cfIndex + dir); _restartCfTimer(); return; }
       const track = document.getElementById('modalGrid');
       if (!track) return;
       track.scrollBy({ left: dir * track.clientWidth, behavior: 'smooth' });
     }
     function carouselGoTo(i) {
+      if (_isCrossfade) { crossfadeGoTo(i); _restartCfTimer(); return; }
       const track = document.getElementById('modalGrid');
       if (!track) return;
       track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+    }
+    /* Auto cross-fade for still-only projects (e.g. New Year) */
+    function _setupCrossfade(count) {
+      clearInterval(_cfTimer); _cfTimer = null; _cfIndex = 0; _isCrossfade = false;
+      const track = document.getElementById('modalGrid');
+      if (!track) return;
+      track.classList.remove('crossfade');
+      if (!count || count < 2) return;
+      _isCrossfade = true;
+      track.classList.add('crossfade');
+      track.onscroll = null;
+      Array.from(track.children).forEach((k, i) => k.classList.toggle('cf-show', i === 0));
+      _cfTimer = setInterval(() => crossfadeGoTo(_cfIndex + 1), 3500);
+    }
+    function crossfadeGoTo(i) {
+      const track = document.getElementById('modalGrid');
+      if (!track) return;
+      const kids = Array.from(track.children);
+      if (!kids.length) return;
+      _cfIndex = ((i % kids.length) + kids.length) % kids.length;
+      kids.forEach((k, idx) => k.classList.toggle('cf-show', idx === _cfIndex));
+      document.querySelectorAll('#carouselDots .carousel-dot')
+        .forEach((d, idx) => d.classList.toggle('active', idx === _cfIndex));
+      _syncCarouselVideos(_cfIndex);
+    }
+    function _restartCfTimer() {
+      if (!_isCrossfade) return;
+      clearInterval(_cfTimer);
+      _cfTimer = setInterval(() => crossfadeGoTo(_cfIndex + 1), 3500);
     }
     function _updateCarouselDots() {
       const track = document.getElementById('modalGrid');
@@ -2328,10 +2380,12 @@
       m.classList.remove('open');
       m.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
-      // Pause any playing videos, then reset gallery scroll
+      // Stop auto cross-fade, pause any playing videos, then reset gallery scroll
+      clearInterval(_cfTimer); _cfTimer = null; _isCrossfade = false;
       const gallery = document.getElementById('modalGrid');
       if (gallery) {
         gallery.querySelectorAll('video').forEach(v => { try { v.pause(); } catch(_){} });
+        gallery.classList.remove('crossfade');
         gallery.scrollLeft = 0;
       }
       if (_modalTrigger) { try { _modalTrigger.focus(); } catch(_){} _modalTrigger = null; }
