@@ -1930,6 +1930,9 @@
       <p class="about-contact-line">Feel free to email me — I'd love to chat about your next project.</p>
       <a class="about-email" href="mailto:thelindamiller@gmail.com">thelindamiller@gmail.com</a>
 
+      <!-- Quote / brief funnel (Update 4) -->
+      <a class="btn-pink" href="quote.html" style="letter-spacing:0.12em; margin-top:1.4rem; text-decoration:none;">REQUEST A QUOTE</a>
+
       <!-- Photo placeholders — replace linda-1.jpg and linda-2.jpg -->
       <div class="photo-grid">
         <div class="photo-card">
@@ -2134,6 +2137,12 @@
       document.getElementById(id).classList.add('active');
       window.scrollTo(0, 0);
     }
+
+    /* Hash deep-links (e.g. quote.html links to index.html#work / #about) */
+    (function initHashRoute() {
+      const id = location.hash.replace('#', '');
+      if (id && document.querySelector('.page#' + id)) showPage(id);
+    })();
 
     /* ---- PROCEDURAL STARS ---- */
     (function addStars() {
