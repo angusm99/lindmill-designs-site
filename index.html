@@ -2274,9 +2274,11 @@
             v.src = slide.src;
             v.loop = true; v.muted = true; v.playsInline = true;
             v.setAttribute('playsinline', ''); v.setAttribute('muted', '');
-            v.preload = (idx === 0) ? 'auto' : 'metadata';
+            v.preload = 'auto';   // clips are 0.3–0.7MB; eager-load so slides never sit blank on CDN cold cache
             if (idx === 0) v.autoplay = true;
-            v.setAttribute('aria-label', `${p.title} — animation ${idx + 1}`);
+            // Tap toggles playback — covers low-power phones where muted autoplay is blocked
+            v.addEventListener('click', () => { v.paused ? v.play().catch(()=>{}) : v.pause(); });
+            v.setAttribute('aria-label', `${p.title} — animation ${idx + 1} (tap to play/pause)`);
             track.appendChild(v);
           } else {
             const img = document.createElement('img');
